@@ -1,4 +1,7 @@
 <header class="overflow-visible border-b border-slate-200 bg-white/95 text-slate-700 shadow-[0_12px_35px_-28px_rgba(15,23,42,0.35)] backdrop-blur">
+    <!-- Drawer Toggle Checkbox -->
+    <input type="checkbox" id="mobile-menu-drawer" class="peer hidden" />
+
     <div class="mx-auto flex w-full max-w-7xl flex-nowrap items-center gap-3 overflow-visible px-4 py-4">
         <a href="{{ route('home') }}" class="inline-flex min-w-0 items-center gap-3 rounded-sm py-2 transition hover:bg-gray-50">
             <span class="flex size-9 shrink-0 items-center justify-center rounded-sm bg-blue-600 text-white shadow-[0_12px_24px_-16px_rgba(37,99,235,0.9)]">
@@ -13,7 +16,8 @@
             </span>
         </a>
 
-        <div class="ml-auto shrink-0">
+        <!-- Desktop Navigation: hidden on mobile, visible on lg -->
+        <div class="ml-auto shrink-0 hidden lg:block">
             <nav>
                 <ul class="flex flex-nowrap items-center gap-1 text-sm font-medium text-slate-700">
                     <li><a href="{{ route('home') }}" class="inline-flex rounded-sm px-3 py-2 hover:bg-slate-100">Trang chủ</a></li>
@@ -96,7 +100,8 @@
             </nav>
         </div>
 
-        <div class="flex shrink-0 items-center gap-1">
+        <!-- Action triggers: Search, Profile/Login, and Hamburger -->
+        <div class="flex shrink-0 items-center gap-1 ml-auto lg:ml-0">
             <button
                 type="button"
                 id="global-search-trigger"
@@ -141,6 +146,139 @@
                     </svg>
                 </a>
             @endauth
+
+            <!-- Mobile Hamburger Button -->
+            <label for="mobile-menu-drawer" class="btn btn-ghost btn-circle lg:hidden" aria-label="Mở menu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </label>
+        </div>
+    </div>
+
+    <!-- Drawer Backdrop and Content (controlled via peer selector on mobile-menu-drawer checkbox) -->
+    <div class="pointer-events-none fixed inset-0 z-[2000] flex justify-end bg-slate-900/40 opacity-0 transition-all duration-300 backdrop-blur-sm peer-checked:pointer-events-auto peer-checked:opacity-100">
+        <!-- Close overlay label -->
+        <label for="mobile-menu-drawer" class="absolute inset-0 cursor-default"></label>
+        
+        <!-- Drawer Panel -->
+        <div class="relative w-80 max-w-[85vw] translate-x-full bg-white p-6 shadow-2xl transition-transform duration-300 peer-checked:translate-x-0 flex flex-col h-full z-[2010]">
+            <!-- Drawer Header -->
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
+                <span class="font-semibold text-slate-900 uppercase">Menu</span>
+                <label for="mobile-menu-drawer" class="btn btn-ghost btn-circle btn-sm" aria-label="Đóng menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </label>
+            </div>
+
+            <!-- Drawer Links -->
+            <nav class="flex-1 overflow-y-auto pr-1">
+                <ul class="flex flex-col gap-2 text-base font-medium text-slate-700">
+                    <li>
+                        <a href="{{ route('home') }}" class="flex rounded-sm px-3 py-2.5 transition hover:bg-slate-100">
+                            Trang chủ
+                        </a>
+                    </li>
+                    @auth
+                        @if (auth()->user()->role === 'teacher')
+                            <li>
+                                <details class="group">
+                                    <summary class="flex cursor-pointer items-center justify-between rounded-sm px-3 py-2.5 hover:bg-slate-100 list-none [&::-webkit-details-marker]:hidden">
+                                        <span>Văn bản</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-slate-400 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </summary>
+                                    <ul class="mt-1 pl-4 flex flex-col gap-1 border-l border-slate-100">
+                                        <li>
+                                            <a href="{{ route('admin.texts.index') }}" class="block rounded-sm px-3 py-2 text-sm text-slate-600 hover:bg-slate-50">
+                                                Danh sách văn bản
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.text-topics.index') }}" class="block rounded-sm px-3 py-2 text-sm text-slate-600 hover:bg-slate-50">
+                                                Loại văn bản
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </details>
+                            </li>
+                            <li>
+                                <details class="group">
+                                    <summary class="flex cursor-pointer items-center justify-between rounded-sm px-3 py-2.5 hover:bg-slate-100 list-none [&::-webkit-details-marker]:hidden">
+                                        <span>Nhiệm vụ đọc hiểu</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-slate-400 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </summary>
+                                    <ul class="mt-1 pl-4 flex flex-col gap-1 border-l border-slate-100">
+                                        <li>
+                                            <a href="{{ route('admin.reading-classes.index') }}" class="block rounded-sm px-3 py-2 text-sm text-slate-600 hover:bg-slate-50">
+                                                Danh sách Nhiệm vụ đọc hiểu
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('admin.assignments.index') }}" class="block rounded-sm px-3 py-2 text-sm text-slate-600 hover:bg-slate-50">
+                                                Bộ câu hỏi
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </details>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.users.index') }}" class="flex rounded-sm px-3 py-2.5 hover:bg-slate-100">
+                                    Người dùng
+                                </a>
+                            </li>
+                        @elseif (auth()->user()->role === 'user')
+                            <li>
+                                <a href="{{ route('home') }}" class="flex rounded-sm px-3 py-2.5 hover:bg-slate-100">
+                                    Văn bản
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('user.reading-classes.index') }}" class="flex rounded-sm px-3 py-2.5 hover:bg-slate-100">
+                                    Nhiệm vụ đọc hiểu
+                                </a>
+                            </li>
+                        @endif
+                    @else
+                        <li>
+                            <a href="{{ route('login') }}" class="flex rounded-sm px-3 py-2.5 hover:bg-slate-100">
+                                Đăng nhập
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('register') }}" class="flex rounded-sm px-3 py-2.5 hover:bg-slate-100">
+                                Đăng ký
+                            </a>
+                        </li>
+                    @endauth
+                </ul>
+            </nav>
+
+            <!-- Drawer Footer (User Profile & Account Info) -->
+            @auth
+                <div class="border-t border-slate-100 pt-4 mt-4">
+                    <div class="px-3 py-2 mb-3 bg-slate-50 rounded-sm">
+                        <p class="truncate text-sm font-semibold text-slate-900">{{ auth()->user()->name }}</p>
+                        <p class="truncate text-xs text-slate-500">{{ auth()->user()->email }}</p>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <a href="{{ route('account.show') }}" class="flex rounded-sm px-3 py-2 text-sm text-slate-700 hover:bg-slate-100">
+                            Tài khoản của tôi
+                        </a>
+                        <form method="POST" action="{{ route('logout') }}" class="w-full">
+                            @csrf
+                            <button type="submit" class="flex w-full rounded-sm px-3 py-2 text-sm text-left text-slate-700 hover:bg-slate-100">
+                                Đăng xuất
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            @endauth
         </div>
     </div>
 </header>
@@ -152,5 +290,19 @@
                 details.removeAttribute('open');
             }
         });
+    });
+
+    // Body scroll locking when drawer is open
+    document.addEventListener('DOMContentLoaded', function() {
+        const drawerToggle = document.getElementById('mobile-menu-drawer');
+        if (drawerToggle) {
+            drawerToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    document.body.classList.add('overflow-hidden');
+                } else {
+                    document.body.classList.remove('overflow-hidden');
+                }
+            });
+        }
     });
 </script>
