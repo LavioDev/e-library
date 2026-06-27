@@ -1,0 +1,4 @@
+Có văn bản, có tương tác, theo dõi được HS đọc hay ko, có cả câu hỏi để Hs làm bài trên đó
+- chức năng hs có đọc hay không: random modal check
+- tương tác: bôi đen + comment trên văn bản
+- câu hỏi: trắc nghiệm hoặc slide text nhập

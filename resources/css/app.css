@@ -1,0 +1,70 @@
+@import 'tailwindcss';
+@plugin "daisyui" {
+    themes: false;
+}
+
+@plugin "daisyui/theme" {
+    name: 'library';
+    default: true;
+    prefersdark: false;
+    color-scheme: light;
+    --color-base-100: oklch(99.2% 0.004 247.9);
+    --color-base-200: oklch(97.8% 0.006 247.9);
+    --color-base-300: oklch(94.8% 0.012 251.2);
+    --color-base-content: oklch(24.5% 0.02 255.4);
+    --color-primary: oklch(50.5% 0.17 259.2);
+    --color-primary-content: var(--color-white);
+    --color-secondary: oklch(71% 0.08 235);
+    --color-secondary-content: oklch(22% 0.02 255.4);
+    --color-accent: oklch(84% 0.03 245);
+    --color-accent-content: oklch(22% 0.02 255.4);
+    --color-neutral: oklch(28% 0.02 255.4);
+    --color-neutral-content: oklch(98.5% 0.004 247.9);
+    --color-info: oklch(73% 0.08 240);
+    --color-info-content: oklch(22% 0.02 255.4);
+    --color-success: oklch(74% 0.08 165);
+    --color-success-content: oklch(22% 0.02 255.4);
+    --color-warning: oklch(84% 0.11 85);
+    --color-warning-content: oklch(22% 0.02 255.4);
+    --color-error: oklch(68% 0.16 24);
+    --color-error-content: var(--color-white);
+    --radius-selector: 0.25rem;
+    --radius-field: 0.25rem;
+    --radius-box: 0.25rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+}
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Bahnschrift', 'DIN Alternate', 'Segoe UI', ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+@layer base {
+    html {
+        color-scheme: light;
+    }
+
+    body {
+        @apply min-h-screen bg-base-200 text-sm text-base-content antialiased;
+        font-family: var(--font-sans);
+    }
+
+    h1 {
+        @apply text-4xl font-semibold tracking-tight text-slate-950;
+    }
+
+    h2 {
+        @apply text-2xl font-semibold tracking-tight text-slate-950;
+    }
+
+    h3 {
+        @apply text-lg font-semibold text-slate-900;
+    }
+}
