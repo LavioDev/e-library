@@ -17,7 +17,7 @@
         </a>
 
         <!-- Desktop Navigation: hidden on mobile, visible on lg -->
-        <div class="ml-auto shrink-0 hidden lg:block">
+        <div class="ml-auto shrink-0 lg-nav-hide">
             <nav>
                 <ul class="flex flex-nowrap items-center gap-1 text-sm font-medium text-slate-700">
                     <li><a href="{{ route('home') }}" class="inline-flex rounded-sm px-3 py-2 hover:bg-slate-100">Trang chủ</a></li>
@@ -101,7 +101,7 @@
         </div>
 
         <!-- Action triggers: Search, Profile/Login, and Hamburger -->
-        <div class="flex shrink-0 items-center gap-1 ml-auto lg:ml-0">
+        <div class="flex shrink-0 items-center gap-1 mobile-ml-auto desktop-ml-0">
             <button
                 type="button"
                 id="global-search-trigger"
@@ -148,7 +148,7 @@
             @endauth
 
             <!-- Mobile Hamburger Button -->
-            <label for="mobile-menu-drawer" class="btn btn-ghost btn-circle lg:hidden" aria-label="Mở menu">
+            <label for="mobile-menu-drawer" class="btn btn-ghost btn-circle hamburger-hide" aria-label="Mở menu">
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
@@ -156,13 +156,13 @@
         </div>
     </div>
 
-    <!-- Drawer Backdrop and Content (controlled via peer selector on mobile-menu-drawer checkbox) -->
-    <div class="pointer-events-none fixed inset-0 z-[2000] flex justify-end bg-slate-900/40 opacity-0 transition-all duration-300 backdrop-blur-sm peer-checked:pointer-events-auto peer-checked:opacity-100">
+    <!-- Drawer Backdrop and Content -->
+    <div class="drawer-backdrop">
         <!-- Close overlay label -->
         <label for="mobile-menu-drawer" class="absolute inset-0 cursor-default"></label>
         
         <!-- Drawer Panel -->
-        <div class="relative w-80 max-w-[85vw] translate-x-full bg-white p-6 shadow-2xl transition-transform duration-300 peer-checked:translate-x-0 flex flex-col h-full z-[2010]">
+        <div class="drawer-panel z-[2010]">
             <!-- Drawer Header -->
             <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
                 <span class="font-semibold text-slate-900 uppercase">Menu</span>
@@ -282,6 +282,69 @@
         </div>
     </div>
 </header>
+
+<style>
+    /* Khoá cuộn trang khi body có class overflow-hidden */
+    body.overflow-hidden {
+        overflow: hidden !important;
+    }
+
+    /* Thiết lập Drawer Backdrop */
+    .drawer-backdrop {
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 2000;
+        display: flex;
+        justify-content: flex-end;
+        background-color: rgba(15, 23, 42, 0.4);
+        backdrop-filter: blur(4px);
+        opacity: 0;
+        transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Thiết lập Drawer Panel */
+    .drawer-panel {
+        position: relative;
+        width: 20rem; /* 320px */
+        max-width: 85vw;
+        height: 100%;
+        background-color: #ffffff;
+        padding: 1.5rem;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        display: flex;
+        flex-direction: column;
+        transform: translateX(100%);
+        transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Hiệu ứng hiển thị khi Checkbox được chọn */
+    #mobile-menu-drawer:checked ~ .drawer-backdrop {
+        pointer-events: auto;
+        opacity: 1;
+    }
+    #mobile-menu-drawer:checked ~ .drawer-backdrop .drawer-panel {
+        transform: translateX(0);
+    }
+
+    /* Định dạng Responsive thủ công không phụ thuộc biên dịch CSS utility */
+    @media (max-width: 1023px) {
+        .lg-nav-hide {
+            display: none !important;
+        }
+        .mobile-ml-auto {
+            margin-left: auto !important;
+        }
+    }
+    @media (min-width: 1024px) {
+        .hamburger-hide {
+            display: none !important;
+        }
+        .desktop-ml-0 {
+            margin-left: 0 !important;
+        }
+    }
+</style>
 
 <script>
     document.addEventListener('click', function(e) {
