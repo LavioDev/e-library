@@ -61,8 +61,8 @@
                 $assignmentQuestionCount = (int) $selectedAssignment->questions_count;
             @endphp
 
-            <div class="grid grid-cols-1 gap-5 xl:grid-cols-[480px_minmax(0,1fr)]">
-                <div class="h-fit overflow-hidden rounded-sm border border-slate-200 bg-white shadow-[0_18px_44px_-36px_rgba(15,23,42,0.35)]">
+            <div class="grid grid-cols-1 gap-5 lg:grid-cols-10">
+                <div class="lg:col-span-3 h-fit overflow-hidden rounded-sm border border-slate-200 bg-white shadow-[0_18px_44px_-36px_rgba(15,23,42,0.35)]">
                     <div class="border-b border-slate-200 bg-slate-50 px-4 py-3">
                         <h2 class="text-sm font-semibold text-slate-900">Danh sách học sinh</h2>
                     </div>
@@ -149,7 +149,7 @@
                     </div>
                 </div>
 
-                <div class="min-w-0 rounded-sm border border-slate-200 bg-white p-5 shadow-[0_18px_44px_-36px_rgba(15,23,42,0.35)]">
+                <div class="lg:col-span-7 min-w-0 rounded-sm border border-slate-200 bg-white p-5 shadow-[0_18px_44px_-36px_rgba(15,23,42,0.35)]">
                     @if ($selectedSubmission === null)
                         <p class="text-sm text-slate-500">Chọn học sinh có bài nộp để xem và chấm điểm.</p>
                     @else
