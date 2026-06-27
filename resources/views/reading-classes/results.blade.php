@@ -5,7 +5,7 @@
 @push('styles')
     <style>
         /* Tăng width lên full cho trang kết quả */
-        main > div.max-w-7xl {
+        main > div:first-child {
             max-width: 100% !important;
         }
     </style>
@@ -61,8 +61,8 @@
                 $assignmentQuestionCount = (int) $selectedAssignment->questions_count;
             @endphp
 
-            <div class="grid grid-cols-10 gap-5">
-                <div class="col-span-3 h-fit overflow-hidden rounded-sm border border-slate-200 bg-white shadow-[0_18px_44px_-36px_rgba(15,23,42,0.35)]">
+            <div class="flex gap-5">
+                <div class="h-fit overflow-hidden rounded-sm border border-slate-200 bg-white shadow-[0_18px_44px_-36px_rgba(15,23,42,0.35)]" style="width: 30%; flex-shrink: 0;">
                     <div class="border-b border-slate-200 bg-slate-50 px-4 py-3">
                         <h2 class="text-sm font-semibold text-slate-900">Danh sách học sinh</h2>
                     </div>
@@ -149,7 +149,7 @@
                     </div>
                 </div>
 
-                <div class="col-span-7 min-w-0 rounded-sm border border-slate-200 bg-white p-5 shadow-[0_18px_44px_-36px_rgba(15,23,42,0.35)]">
+                <div class="min-w-0 rounded-sm border border-slate-200 bg-white p-5 shadow-[0_18px_44px_-36px_rgba(15,23,42,0.35)]" style="flex: 1;">
                     @if ($selectedSubmission === null)
                         <p class="text-sm text-slate-500">Chọn học sinh có bài nộp để xem và chấm điểm.</p>
                     @else
