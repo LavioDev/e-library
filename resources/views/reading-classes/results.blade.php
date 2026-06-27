@@ -12,41 +12,43 @@
 @endpush
 
 @section('breadcrumbs')
-    <nav class="mb-4 text-sm text-slate-600">
-        <ol class="flex flex-wrap items-center gap-2">
-            <li><a href="{{ route('home') }}" class="hover:text-slate-900">Trang chủ</a></li>
-            <li aria-hidden="true">></li>
-            <li><a href="{{ route('admin.reading-classes.index') }}" class="hover:text-slate-900">Nhiệm vụ đọc hiểu</a></li>
-            <li aria-hidden="true">></li>
-            <li><a href="{{ route('admin.assignments.index', ['reading_class_id' => $readingClass->id]) }}" class="hover:text-slate-900">Bộ câu hỏi</a></li>
-            <li aria-hidden="true">></li>
-            <li class="font-medium text-slate-900">Kết quả</li>
-        </ol>
-    </nav>
+    <div class="mx-auto max-w-7xl">
+        <nav class="mb-4 text-sm text-slate-600">
+            <ol class="flex flex-wrap items-center gap-2">
+                <li><a href="{{ route('home') }}" class="hover:text-slate-900">Trang chủ</a></li>
+                <li aria-hidden="true">></li>
+                <li><a href="{{ route('admin.reading-classes.index') }}" class="hover:text-slate-900">Nhiệm vụ đọc hiểu</a></li>
+                <li aria-hidden="true">></li>
+                <li><a href="{{ route('admin.assignments.index', ['reading_class_id' => $readingClass->id]) }}" class="hover:text-slate-900">Bộ câu hỏi</a></li>
+                <li aria-hidden="true">></li>
+                <li class="font-medium text-slate-900">Kết quả</li>
+            </ol>
+        </nav>
+    </div>
 @endsection
 
 @section('content')
     <section class="space-y-5">
         <div class="rounded-sm border border-slate-200 bg-white p-5 shadow-[0_18px_44px_-36px_rgba(15,23,42,0.35)]">
-            <div class="flex flex-wrap items-center justify-between gap-3">
+            <div class="flex flex-wrap items-center justify-between gap-4">
                 <div>
-                    <h1 class="mt-2 text-xl font-semibold text-slate-900">{{ $readingClass->name }}</h1>
+                    <h1 class="text-xl font-semibold text-slate-900">{{ $readingClass->name }}</h1>
                     <p class="mt-1 text-sm text-slate-600">{{ $readingClass->texts->pluck('name')->implode(', ') ?: 'Chưa gắn văn bản' }}</p>
                 </div>
-            </div>
 
-            <form method="GET" class="mt-5 flex flex-wrap items-center gap-3">
-                <label for="assignment_id" class="text-sm font-medium text-slate-700">Bộ câu hỏi</label>
-                <select id="assignment_id" name="assignment_id" onchange="this.form.submit()" class="select select-sm !h-10 min-h-10 w-full max-w-xl rounded-sm border border-slate-200 bg-white text-sm text-slate-800 shadow-none">
-                    @forelse ($assignments as $assignment)
-                        <option value="{{ $assignment->id }}" @selected((int) $selectedAssignment?->id === (int) $assignment->id)>
-                            {{ $assignment->title }} ({{ $assignment->questions_count }} câu)
-                        </option>
-                    @empty
-                        <option value="">Chưa có bộ câu hỏi</option>
-                    @endforelse
-                </select>
-            </form>
+                <form method="GET" class="flex flex-nowrap items-center gap-3">
+                    <label for="assignment_id" class="text-sm font-medium text-slate-700 whitespace-nowrap">Bộ câu hỏi</label>
+                    <select id="assignment_id" name="assignment_id" onchange="this.form.submit()" class="select select-sm !h-10 min-h-10 w-80 rounded-sm border border-slate-200 bg-white text-sm text-slate-800 shadow-none">
+                        @forelse ($assignments as $assignment)
+                            <option value="{{ $assignment->id }}" @selected((int) $selectedAssignment?->id === (int) $assignment->id)>
+                                {{ $assignment->title }} ({{ $assignment->questions_count }} câu)
+                            </option>
+                        @empty
+                            <option value="">Chưa có bộ câu hỏi</option>
+                        @endforelse
+                    </select>
+                </form>
+            </div>
         </div>
 
         @if ($selectedAssignment === null)
@@ -59,7 +61,7 @@
                 $assignmentQuestionCount = (int) $selectedAssignment->questions_count;
             @endphp
 
-            <div class="grid grid-cols-1 gap-5 xl:grid-cols-[420px_minmax(0,1fr)]">
+            <div class="grid grid-cols-1 gap-5 xl:grid-cols-[480px_minmax(0,1fr)]">
                 <div class="h-fit overflow-hidden rounded-sm border border-slate-200 bg-white shadow-[0_18px_44px_-36px_rgba(15,23,42,0.35)]">
                     <div class="border-b border-slate-200 bg-slate-50 px-4 py-3">
                         <h2 class="text-sm font-semibold text-slate-900">Danh sách học sinh</h2>
@@ -68,7 +70,7 @@
                         <table class="table table-sm">
                             <thead>
                                 <tr class="text-slate-600">
-                                    <th>Học sinh</th>
+                                    <th class="min-w-[160px]">Học sinh</th>
                                     <th class="w-fit whitespace-nowrap">Trạng thái</th>
                                     <th>Nộp lúc</th>
                                     <th class="text-right">Kết quả</th>
