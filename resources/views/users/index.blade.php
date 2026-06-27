@@ -59,6 +59,7 @@
                             <th>Tên</th>
                             <th>Email</th>
                             <th>Vai trò</th>
+                            <th>Đăng nhập gần nhất</th>
                             <th>Ngày tạo</th>
                             <th class="text-right">Thao tác</th>
                         </tr>
@@ -84,6 +85,13 @@
                                         {{ $user->role === 'teacher' ? 'Giáo viên' : 'Người dùng' }}
                                     </span>
                                 </td>
+                                <td>
+                                    @if ($user->last_login_at)
+                                        {{ $user->last_login_at->format('d/m/Y H:i') }}
+                                    @else
+                                        <span class="text-slate-400 font-normal">Chưa đăng nhập</span>
+                                    @endif
+                                </td>
                                 <td>{{ optional($user->created_at)->format('d/m/Y H:i') }}</td>
                                 <td>
                                     <div class="flex justify-end gap-2">
@@ -107,7 +115,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="py-10 text-center text-slate-500">Chưa có người dùng nào.</td>
+                                <td colspan="6" class="py-10 text-center text-slate-500">Chưa có người dùng nào.</td>
                             </tr>
                         @endforelse
                     </tbody>

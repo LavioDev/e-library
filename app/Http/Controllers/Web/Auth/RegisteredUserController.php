@@ -36,6 +36,8 @@ class RegisteredUserController extends Controller
         // Đăng nhập tự động ngay sau khi đăng ký thành công
         Auth::guard('web')->login($user);
 
+        $user->update(['last_login_at' => now()]);
+
         $request->session()->regenerate();
 
         return redirect()

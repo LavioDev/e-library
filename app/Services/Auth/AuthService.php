@@ -36,6 +36,8 @@ class AuthService
 
         $token = $user->createToken('library-web')->plainTextToken;
 
+        $user->update(['last_login_at' => now()]);
+
         Log::info('User logged in.', [
             'user_id' => $user->id,
         ]);
@@ -69,6 +71,10 @@ class AuthService
                 'email' => ['Email hoặc mật khẩu không đúng.'],
             ]);
         }
+
+        /** @var User $user */
+        $user = Auth::user();
+        $user->update(['last_login_at' => now()]);
     }
 
     public function logoutWeb(Request $request): void
