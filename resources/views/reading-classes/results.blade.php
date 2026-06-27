@@ -2,6 +2,15 @@
 
 @section('title', 'Kết quả Nhiệm vụ đọc hiểu')
 
+@push('styles')
+    <style>
+        /* Tăng width lên full cho trang kết quả */
+        main > div.max-w-7xl {
+            max-width: 100% !important;
+        }
+    </style>
+@endpush
+
 @section('breadcrumbs')
     <nav class="mb-4 text-sm text-slate-600">
         <ol class="flex flex-wrap items-center gap-2">
@@ -61,6 +70,7 @@
                                 <tr class="text-slate-600">
                                     <th>Học sinh</th>
                                     <th class="w-fit whitespace-nowrap">Trạng thái</th>
+                                    <th>Nộp lúc</th>
                                     <th class="text-right">Kết quả</th>
                                 </tr>
                             </thead>
@@ -111,6 +121,13 @@
                                                 <span class="badge badge-sm border-sky-200 bg-sky-100 text-sky-700">Chưa làm</span>
                                             @endif
                                         </td>
+                                        <td class="text-xs text-slate-500 whitespace-nowrap">
+                                            @if ($submission && $submission->submitted_at)
+                                                {{ $submission->submitted_at->format('d/m/Y H:i') }}
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
                                         <td class="text-right text-sm font-semibold text-slate-700">
                                             @if ($correctCount !== null)
                                                 <span class="block">{{ $correctCount }}/{{ $assignmentQuestionCount }} câu</span>
@@ -122,7 +139,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="3" class="py-8 text-center text-slate-500">Chưa có học sinh trong nhóm.</td>
+                                        <td colspan="4" class="py-8 text-center text-slate-500">Chưa có học sinh trong nhóm.</td>
                                     </tr>
                                 @endforelse
                             </tbody>
