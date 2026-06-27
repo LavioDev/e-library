@@ -62,7 +62,7 @@
             @endphp
 
             <div class="flex gap-5">
-                <div class="h-fit overflow-hidden rounded-sm border border-slate-200 bg-white shadow-[0_18px_44px_-36px_rgba(15,23,42,0.35)]" style="width: 30%; flex-shrink: 0;">
+                <div class="h-fit overflow-hidden rounded-sm border border-slate-200 bg-white shadow-[0_18px_44px_-36px_rgba(15,23,42,0.35)]" style="width: 40%; flex-shrink: 0;">
                     <div class="border-b border-slate-200 bg-slate-50 px-4 py-3">
                         <h2 class="text-sm font-semibold text-slate-900">Danh sách học sinh</h2>
                     </div>
