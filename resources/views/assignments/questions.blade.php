@@ -3,34 +3,42 @@
 @section('title', 'Câu hỏi bộ câu hỏi')
 
 @section('content')
-    <section class="space-y-5">
-        <div class="rounded-sm border border-slate-200 bg-white p-5 shadow-[0_18px_44px_-36px_rgba(15,23,42,0.35)]">
-            <div class="flex flex-wrap items-center justify-between gap-3">
+    <section class="space-y-6">
+        {{-- ─── FILTERS & HEADER INFO ─── --}}
+        <div class="rounded-2xl border p-5 shadow-sm" style="background: oklch(99.8% 0.003 75); border-color: oklch(89% 0.018 72);">
+            <div class="flex flex-wrap items-center justify-between gap-4">
                 <div>
-                    <h1 class="text-sm font-semibold text-slate-900">{{ $assignment->title }}</h1>
-                    <p class="text-xs text-slate-600">
-                        Nhiệm vụ đọc hiểu: <span class="font-medium">{{ $assignment->readingClass?->name }}</span>
+                    <h1 class="text-sm font-bold uppercase tracking-wider" style="color: oklch(18% 0.020 58);">{{ $assignment->title }}</h1>
+                    <p class="text-xs font-serif italic mt-0.5" style="color: oklch(46% 0.018 58);">
+                        Nhiệm vụ đọc hiểu: <span class="font-sans font-semibold not-italic" style="color: oklch(34% 0.025 64);">{{ $assignment->readingClass?->name }}</span>
                     </p>
                 </div>
 
-                <form method="GET" action="{{ route('admin.assignments.questions.index', $assignment) }}" class="flex items-center gap-2">
+                <form method="GET" action="{{ route('admin.assignments.questions.index', $assignment) }}" class="flex flex-wrap items-center gap-2">
                     <input
                         id="keyword"
                         type="text"
                         name="keyword"
                         value="{{ $filters['keyword'] ?? '' }}"
                         placeholder="Tìm theo nội dung câu hỏi"
-                        class="input input-sm !h-10 min-h-10 w-72 rounded-sm border border-slate-200 bg-white text-sm text-slate-800 shadow-none"
+                        class="input input-sm !h-10 min-h-10 w-72 rounded-xl border text-sm shadow-none focus:outline-none"
+                        style="border-color: oklch(86% 0.020 72); background: oklch(97% 0.010 76); color: oklch(20% 0.022 60);"
                     />
-                    <button type="submit" class="btn btn-ghost btn-sm !h-10 min-h-10 rounded-sm border border-slate-200 bg-white px-4 text-slate-700 shadow-none hover:bg-slate-50">
+                    <button type="submit" class="btn btn-ghost btn-sm !h-10 min-h-10 rounded-xl border px-4 shadow-none transition"
+                            style="border-color: oklch(86% 0.020 72); background: oklch(99.4% 0.005 78); color: oklch(34% 0.022 62);"
+                            onmouseover="this.style.background='oklch(95% 0.012 75)'" onmouseout="this.style.background=''">
                         Lọc
                     </button>
-                    <a href="{{ route('admin.assignments.questions.index', $assignment) }}" class="btn btn-ghost btn-sm !h-10 min-h-10 rounded-sm border border-slate-200 bg-white px-4 text-slate-700 shadow-none hover:bg-slate-50">
+                    <a href="{{ route('admin.assignments.questions.index', $assignment) }}" class="btn btn-ghost btn-sm !h-10 min-h-10 rounded-xl border px-4 shadow-none transition"
+                       style="border-color: oklch(86% 0.020 72); background: oklch(99.4% 0.005 78); color: oklch(34% 0.022 62);"
+                       onmouseover="this.style.background='oklch(95% 0.012 75)'" onmouseout="this.style.background=''">
                         Xóa lọc
                     </a>
                     <button
                         type="button"
-                        class="btn btn-primary btn-sm !h-10 min-h-10 rounded-sm border-0 px-4 text-white shadow-none"
+                        class="btn btn-sm !h-10 min-h-10 rounded-xl border px-4 text-white shadow-none transition"
+                        style="border: 1px solid oklch(36% 0.056 50 / 0.35); background: var(--g-primary);"
+                        onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'"
                         data-open-modal="create-question-modal"
                     >
                         Thêm câu hỏi
@@ -39,17 +47,18 @@
             </div>
         </div>
 
-        <section class="overflow-hidden rounded-sm border border-slate-200 bg-white shadow-[0_18px_44px_-36px_rgba(15,23,42,0.35)]">
+        {{-- ─── TABLE SECTION ─── --}}
+        <section class="overflow-hidden rounded-2xl border shadow-sm" style="border-color: oklch(89% 0.018 72);">
             <div class="overflow-x-auto">
                 <table class="table">
-                    <thead class="bg-slate-50 text-slate-600">
+                    <thead style="background: oklch(97% 0.010 76); color: oklch(30% 0.022 60); border-bottom: 1px solid oklch(89% 0.018 72);">
                         <tr>
-                            <th>Thứ tự</th>
-                            <th>Loại</th>
+                            <th class="w-20">Thứ tự</th>
+                            <th class="w-36">Loại</th>
                             <th>Nội dung</th>
-                            <th>Điểm tối đa</th>
-                            <th>Đáp án đúng</th>
-                            <th>Ngày tạo</th>
+                            <th class="w-32">Điểm tối đa</th>
+                            <th class="w-48">Đáp án đúng</th>
+                            <th class="w-40">Ngày tạo</th>
                             <th class="text-right">Thao tác</th>
                         </tr>
                     </thead>
@@ -76,20 +85,22 @@
                                     default => 'Khác',
                                 };
                             @endphp
-                            <tr>
-                                <td>{{ $question->position }}</td>
-                                <td>{{ $typeLabel }}</td>
+                            <tr style="border-bottom: 1px solid oklch(92% 0.016 74);">
+                                <td class="font-semibold" style="color: oklch(18% 0.020 58);">{{ $question->position }}</td>
+                                <td style="color: oklch(34% 0.025 64);">{{ $typeLabel }}</td>
                                 <td class="max-w-lg">
-                                    <p class="line-clamp-2 font-medium text-slate-900">{{ $question->prompt }}</p>
+                                    <p class="line-clamp-2 font-medium" style="color: oklch(18% 0.020 58);">{{ $question->prompt }}</p>
                                 </td>
-                                <td>{{ rtrim(rtrim((string) $question->max_score, '0'), '.') }}</td>
-                                <td>{{ $question->type === 'multiple_choice' ? ($question->correct_answer ?: '-') : '-' }}</td>
-                                <td>{{ optional($question->created_at)->format('d/m/Y H:i') }}</td>
+                                <td style="color: oklch(34% 0.025 64);">{{ rtrim(rtrim((string) $question->max_score, '0'), '.') }}</td>
+                                <td class="max-w-xs truncate" style="color: oklch(34% 0.025 64);">{{ $question->type === 'multiple_choice' ? ($question->correct_answer ?: '-') : '-' }}</td>
+                                <td style="color: oklch(34% 0.025 64);">{{ optional($question->created_at)->format('d/m/Y H:i') }}</td>
                                 <td>
                                     <div class="flex justify-end gap-2">
                                         <button
                                             type="button"
-                                            class="btn btn-ghost btn-sm rounded-sm border border-slate-200 bg-white text-slate-700 shadow-none hover:bg-slate-50"
+                                            class="btn btn-ghost btn-sm rounded-xl border px-3 shadow-none transition"
+                                            style="border-color: oklch(86% 0.020 72); background: oklch(99.4% 0.005 78); color: oklch(34% 0.022 62);"
+                                            onmouseover="this.style.background='oklch(95% 0.012 75)'" onmouseout="this.style.background=''"
                                             data-open-modal="edit-question-modal"
                                             data-question='@json($questionPayload)'
                                         >
@@ -98,7 +109,9 @@
                                         <form method="POST" action="{{ route('admin.assignments.questions.destroy', [$assignment, $question]) }}" data-confirm-delete="true" data-confirm-message="Xóa câu hỏi này?">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm rounded-sm border-0 bg-rose-600 text-white shadow-none hover:bg-rose-700">
+                                            <button type="submit" class="btn btn-ghost btn-sm rounded-xl border px-3 shadow-none transition"
+                                                    style="border-color: oklch(76% 0.080 42 / 0.25); background: oklch(99.4% 0.005 78); color: oklch(38% 0.080 42);"
+                                                    onmouseover="this.style.background='oklch(95% 0.020 40)'" onmouseout="this.style.background=''">
                                                 Xóa
                                             </button>
                                         </form>
@@ -116,14 +129,15 @@
         </section>
     </section>
 
+    {{-- ─── CREATE MODAL ─── --}}
     <dialog id="create-question-modal" class="modal">
-        <div class="modal-box w-xl max-w-none rounded-sm bg-white p-0 shadow-2xl">
-            <div class="border-b border-slate-200 px-5 py-4">
-                <h2 class="text-xl font-semibold text-slate-900">Thêm câu hỏi</h2>
+        <div class="modal-box w-xl max-w-none p-0 shadow-2xl" style="background: oklch(99.4% 0.005 78); border: 1px solid oklch(88% 0.020 72); border-radius: 16px;">
+            <div class="px-5 py-4" style="border-bottom: 1px solid oklch(90% 0.018 74);">
+                <h2 class="text-lg font-bold" style="color: oklch(18% 0.020 58);">Thêm câu hỏi</h2>
             </div>
             <form method="POST" action="{{ route('admin.assignments.questions.store', $assignment) }}" id="create-question-form">
                 @csrf
-                <div class="px-5 py-5">
+                <div class="px-5 py-5 max-h-[60vh] overflow-y-auto">
                     @include('assignments._question_form_fields', [
                         'prefix' => 'create',
                         'type' => old('type', 'multiple_choice'),
@@ -135,11 +149,16 @@
                     ])
                 </div>
 
-                <div class="modal-action mt-0 border-t border-slate-200 px-5 py-4">
-                    <button type="button" class="btn btn-ghost btn-sm !h-10 min-h-10 rounded-sm border border-slate-200 bg-white px-4 text-slate-700 shadow-none hover:bg-slate-50" data-close-modal="create-question-modal">
+                <div class="modal-action mt-0 px-5 py-4" style="border-top: 1px solid oklch(90% 0.018 74);">
+                    <button type="button" class="btn btn-ghost btn-sm !h-10 min-h-10 rounded-xl border px-4 shadow-none transition"
+                            style="border-color: oklch(86% 0.020 72); background: oklch(99.4% 0.005 78); color: oklch(34% 0.022 62);"
+                            onmouseover="this.style.background='oklch(95% 0.012 75)'" onmouseout="this.style.background=''"
+                            data-close-modal="create-question-modal">
                         Hủy
                     </button>
-                    <button type="submit" class="btn btn-primary btn-sm !h-10 min-h-10 rounded-sm border-0 px-4 text-white shadow-none">
+                    <button type="submit" class="btn btn-sm !h-10 min-h-10 rounded-xl border px-4 text-white shadow-none transition"
+                            style="border: 1px solid oklch(36% 0.056 50 / 0.35); background: var(--g-primary);"
+                            onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
                         Tạo câu hỏi
                     </button>
                 </div>
@@ -150,15 +169,16 @@
         </form>
     </dialog>
 
+    {{-- ─── EDIT MODAL ─── --}}
     <dialog id="edit-question-modal" class="modal">
-        <div class="modal-box w-xl max-w-none rounded-sm bg-white p-0 shadow-2xl">
-            <div class="border-b border-slate-200 px-5 py-4">
-                <h2 class="text-xl font-semibold text-slate-900">Sửa câu hỏi</h2>
+        <div class="modal-box w-xl max-w-none p-0 shadow-2xl" style="background: oklch(99.4% 0.005 78); border: 1px solid oklch(88% 0.020 72); border-radius: 16px;">
+            <div class="px-5 py-4" style="border-bottom: 1px solid oklch(90% 0.018 74);">
+                <h2 class="text-lg font-bold" style="color: oklch(18% 0.020 58);">Sửa câu hỏi</h2>
             </div>
             <form method="POST" action="" id="edit-question-form">
                 @csrf
                 @method('PUT')
-                <div class="px-5 py-5">
+                <div class="px-5 py-5 max-h-[60vh] overflow-y-auto">
                     @include('assignments._question_form_fields', [
                         'prefix' => 'edit',
                         'type' => 'multiple_choice',
@@ -171,11 +191,16 @@
                     ])
                 </div>
 
-                <div class="modal-action mt-0 border-t border-slate-200 px-5 py-4">
-                    <button type="button" class="btn btn-ghost btn-sm !h-10 min-h-10 rounded-sm border border-slate-200 bg-white px-4 text-slate-700 shadow-none hover:bg-slate-50" data-close-modal="edit-question-modal">
+                <div class="modal-action mt-0 px-5 py-4" style="border-top: 1px solid oklch(90% 0.018 74);">
+                    <button type="button" class="btn btn-ghost btn-sm !h-10 min-h-10 rounded-xl border px-4 shadow-none transition"
+                            style="border-color: oklch(86% 0.020 72); background: oklch(99.4% 0.005 78); color: oklch(34% 0.022 62);"
+                            onmouseover="this.style.background='oklch(95% 0.012 75)'" onmouseout="this.style.background=''"
+                            data-close-modal="edit-question-modal">
                         Hủy
                     </button>
-                    <button type="submit" class="btn btn-primary btn-sm !h-10 min-h-10 rounded-sm border-0 px-4 text-white shadow-none">
+                    <button type="submit" class="btn btn-sm !h-10 min-h-10 rounded-xl border px-4 text-white shadow-none transition"
+                            style="border: 1px solid oklch(36% 0.056 50 / 0.35); background: var(--g-primary);"
+                            onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
                         Lưu thay đổi
                     </button>
                 </div>
@@ -259,12 +284,13 @@
             const createRow = (value = '', checked = false) => {
                 const row = document.createElement('div');
                 row.setAttribute('data-mcq-row', '1');
-                row.className = 'flex items-center gap-2 rounded-sm border border-slate-200 bg-white p-2';
+                row.className = 'flex items-center gap-2 rounded-xl border p-2 mb-2 bg-white';
+                row.style.borderColor = 'oklch(90% 0.015 72)';
                 row.innerHTML = `
-                    <span data-mcq-label class="w-7 text-center text-xs font-semibold text-slate-500">A</span>
-                    <input type="radio" data-mcq-radio name="${prefix}_correct_choice" class="radio radio-xs border-slate-300" />
-                    <input type="text" data-mcq-input class="input input-sm !h-9 min-h-9 flex-1 rounded-sm border border-slate-200 bg-white text-sm text-slate-800 shadow-none" placeholder="Nhập đáp án" />
-                    <button type="button" data-remove-mcq-option class="btn btn-ghost btn-xs rounded-sm border border-slate-200 bg-white text-rose-600 hover:bg-rose-50">Xóa</button>
+                    <span data-mcq-label class="w-7 text-center text-xs font-bold" style="color: oklch(46% 0.018 58);">A</span>
+                    <input type="radio" data-mcq-radio name="${prefix}_correct_choice" class="radio radio-sm border-slate-300" style="border-color: oklch(86% 0.020 72);" />
+                    <input type="text" data-mcq-input class="input input-sm !h-9 min-h-9 flex-1 rounded-xl border text-sm shadow-none focus:outline-none" style="border-color: oklch(86% 0.020 72); background: oklch(97% 0.010 76); color: oklch(20% 0.022 60);" placeholder="Nhập đáp án" />
+                    <button type="button" data-remove-mcq-option class="btn btn-ghost btn-xs rounded-xl border px-2 py-1 transition" style="border-color: oklch(76% 0.080 42 / 0.2); background: oklch(99.4% 0.005 78); color: oklch(38% 0.080 42);" onmouseover="this.style.background='oklch(95% 0.020 40)'" onmouseout="this.style.background=''">Xóa</button>
                 `;
 
                 const input = row.querySelector('input[data-mcq-input]');

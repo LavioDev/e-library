@@ -3,27 +3,27 @@
 @section('title', 'Xem văn bản')
 
 @section('content')
-    <section class="space-y-5">
-        <div class="rounded-sm border border-slate-200 bg-white p-5 shadow-[0_18px_44px_-36px_rgba(15,23,42,0.35)]">
+    <section class="space-y-6">
+        <div class="rounded-2xl border p-5 shadow-sm" style="background: oklch(99.8% 0.003 75); border-color: oklch(89% 0.018 72);">
             <div class="mb-4">
-                <h1 class="text-xl font-semibold text-slate-900">Xem văn bản</h1>
-                <p class="text-sm text-slate-500">{{ $text->name }} • {{ $text->author }}</p>
+                <h1 class="text-xl font-semibold" style="color: oklch(18% 0.020 58);">Xem văn bản</h1>
+                <p class="text-sm" style="color: oklch(50% 0.025 65);">{{ $text->name }} • {{ $text->author }}</p>
             </div>
 
-            <div class="mb-4 flex items-end justify-between gap-3">
-                <div class="flex-1">
-                    <label class="mb-1 block text-sm font-medium text-slate-700">Tiêu đề văn bản</label>
-                    <input type="text" value="{{ $document->title ?? $text->name }}" class="input input-sm !h-10 min-h-10 w-full rounded-sm border border-slate-200 bg-slate-50 text-sm text-slate-800 shadow-none" readonly />
+            <div class="mb-4 flex flex-wrap items-end justify-between gap-4">
+                <div class="flex-1 min-w-[250px]">
+                    <label class="mb-1 block text-sm font-medium" style="color: oklch(30% 0.022 60);">Tiêu đề văn bản</label>
+                    <input type="text" value="{{ $document->title ?? $text->name }}" class="input input-sm !h-10 min-h-10 w-full rounded-xl border text-sm shadow-none" style="border-color: oklch(86% 0.020 72); background: oklch(97% 0.010 76); color: oklch(20% 0.022 60);" readonly />
                 </div>
                 <div class="shrink-0">
-                    <p class="mb-1 text-sm font-medium text-slate-700">Nhập/Xuất</p>
+                    <p class="mb-1 text-sm font-medium" style="color: oklch(30% 0.022 60);">Nhập/Xuất</p>
                     <div class="flex items-center gap-2">
                         <form id="writer_import_form" action="{{ route('admin.texts.writer.import-docx', $text) }}" method="POST" enctype="multipart/form-data" class="m-0">
                             @csrf
                             <input id="writer_import_file" type="file" name="import_file" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" class="hidden" />
-                            <button type="button" id="writer_import_button" class="btn btn-sm !h-10 min-h-10 rounded-sm border border-slate-200 bg-white px-4 text-slate-700 shadow-none hover:bg-slate-50">Nhập DOCX</button>
+                            <button type="button" id="writer_import_button" class="btn btn-sm !h-10 min-h-10 rounded-xl border px-4 shadow-none transition" style="border-color: oklch(86% 0.020 72); background: oklch(99.4% 0.005 78); color: oklch(34% 0.022 62);" onmouseover="this.style.background='oklch(95% 0.012 75)'" onmouseout="this.style.background=''">Nhập DOCX</button>
                         </form>
-                        <a href="{{ route('admin.texts.writer.export-docx', $text) }}" id="writer_export_button" class="btn btn-sm !h-10 min-h-10 rounded-sm border border-slate-200 bg-white px-4 text-slate-700 shadow-none hover:bg-slate-50">Xuất DOCX</a>
+                        <a href="{{ route('admin.texts.writer.export-docx', $text) }}" id="writer_export_button" class="btn btn-sm !h-10 min-h-10 rounded-xl border px-4 shadow-none transition" style="border-color: oklch(86% 0.020 72); background: oklch(99.4% 0.005 78); color: oklch(34% 0.022 62); display: inline-flex; align-items: center; justify-content: center;" onmouseover="this.style.background='oklch(95% 0.012 75)'" onmouseout="this.style.background=''">Xuất DOCX</a>
                     </div>
                 </div>
             </div>
@@ -35,10 +35,10 @@
             @endif
 
             <div>
-                <label class="mb-1 block text-sm font-medium text-slate-700">Nội dung văn bản (Preview)</label>
+                <label class="mb-1.5 block text-sm font-medium" style="color: oklch(30% 0.022 60);">Nội dung văn bản (Preview)</label>
                 <div class="flex items-center gap-2 mb-2">
-                    <input type="url" id="link_input" placeholder="Nhập link YouTube hoặc Google Drive" class="input input-sm !h-10 min-h-10 w-full rounded-sm border border-slate-200 bg-white" />
-                    <button type="button" id="add_link_btn" class="btn btn-sm !h-10 min-h-10 w-28 rounded-sm border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 shadow-none px-0 shrink-0">Thêm link</button>
+                    <input type="url" id="link_input" placeholder="Nhập link YouTube hoặc Google Drive" class="input input-sm !h-10 min-h-10 w-full rounded-xl border shadow-none" style="border-color: oklch(86% 0.020 72); background: oklch(99.8% 0.003 75); color: oklch(20% 0.022 60);" />
+                    <button type="button" id="add_link_btn" class="btn btn-sm !h-10 min-h-10 w-28 rounded-xl border shadow-none px-0 shrink-0 transition" style="border-color: oklch(86% 0.020 72); background: oklch(99.4% 0.005 78); color: oklch(34% 0.022 62);" onmouseover="this.style.background='oklch(95% 0.012 75)'" onmouseout="this.style.background=''">Thêm link</button>
                 </div>
                 <!-- Form tải lên file trực tiếp -->
                 <form id="upload-file-ajax-form" class="flex items-center gap-2 mb-4">
@@ -46,9 +46,9 @@
                         <!-- Hidden input file -->
                         <input type="file" id="file_upload_input" class="hidden" accept="image/*,video/*,audio/*" />
                         <!-- Text placeholder to look like the link input -->
-                        <input type="text" id="file_name_display" placeholder="Chọn tệp đính kèm (Ảnh, Video, Âm thanh, ...)" class="input input-sm !h-10 min-h-10 w-full rounded-sm border border-slate-200 bg-white cursor-pointer" readonly />
+                        <input type="text" id="file_name_display" placeholder="Chọn tệp đính kèm (Ảnh, Video, Âm thanh, ...)" class="input input-sm !h-10 min-h-10 w-full rounded-xl border cursor-pointer shadow-none" style="border-color: oklch(86% 0.020 72); background: oklch(99.8% 0.003 75); color: oklch(20% 0.022 60);" readonly />
                     </div>
-                    <button type="button" id="add_file_btn" class="btn btn-sm !h-10 min-h-10 w-28 rounded-sm border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 shadow-none px-0 shrink-0">Thêm file</button>
+                    <button type="button" id="add_file_btn" class="btn btn-sm !h-10 min-h-10 w-28 rounded-xl border shadow-none px-0 shrink-0 transition" style="border-color: oklch(86% 0.020 72); background: oklch(99.4% 0.005 78); color: oklch(34% 0.022 62);" onmouseover="this.style.background='oklch(95% 0.012 75)'" onmouseout="this.style.background=''">Thêm file</button>
                 </form>
 
                 <div id="links-preview" class="space-y-6 mb-6">
@@ -83,28 +83,28 @@
                         @endif
                     @endforeach
                 </div>
-                <div class="writer-preview min-h-[60vh] overflow-auto rounded-sm border border-slate-200 bg-white p-5">
+                <div class="writer-preview min-h-[60vh] overflow-auto rounded-xl border p-5 md:p-8"
+                     style="background: oklch(99.4% 0.005 78); border-color: oklch(89% 0.018 72); font-family: var(--font-serif); font-size: 1.05rem; line-height: 1.8; color: oklch(20% 0.022 60);">
                     {!! $previewHtml !!}
                 </div>
 
                 <!-- Tài liệu đính kèm / File đính kèm -->
-                <div class="mt-6 border-t border-slate-100 pt-6">
+                <div class="mt-6 pt-6" style="border-top: 1px solid oklch(91% 0.016 74);">
                     <div class="mb-4">
-                        <label class="mb-1 block text-sm font-medium text-slate-700">Tài liệu đính kèm (Ảnh, Video, Âm thanh)</label>
-                        <p class="text-xs text-slate-500">Quản lý các file đa phương tiện đính kèm của văn bản này</p>
+                        <label class="mb-1 block text-sm font-medium" style="color: oklch(30% 0.022 60);">Tài liệu đính kèm (Ảnh, Video, Âm thanh)</label>
+                        <p class="text-xs" style="color: oklch(50% 0.025 65);">Quản lý các file đa phương tiện đính kèm của văn bản này</p>
                     </div>
-                    
 
                     <!-- Danh sách các file đã tải lên -->
                     <div id="attached-files-list" class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                         @foreach($text->textFiles as $file)
-                            <div class="flex items-center justify-between rounded-sm border border-slate-200 bg-slate-50 p-3" data-file-id="{{ $file->id }}">
+                            <div class="flex items-center justify-between rounded-xl border p-3" style="background: oklch(98.5% 0.005 78 / 0.5); border-color: oklch(90% 0.018 74);" data-file-id="{{ $file->id }}">
                                 <div class="min-w-0 flex-1 pr-3">
-                                    <p class="truncate text-sm font-medium text-slate-800" title="{{ $file->file_name }}">
+                                    <p class="truncate text-sm font-semibold" style="color: oklch(24% 0.020 58);" title="{{ $file->file_name }}">
                                         {{ $file->file_name }}
                                     </p>
-                                    <div class="mt-1 flex items-center gap-2 text-xs text-slate-500">
-                                        <span class="rounded bg-slate-200 px-1.5 py-0.5 font-semibold uppercase text-slate-600">
+                                    <div class="mt-1 flex items-center gap-2 text-xs" style="color: oklch(50% 0.025 65);">
+                                        <span class="rounded bg-slate-200 px-1.5 py-0.5 font-bold uppercase" style="background: oklch(92% 0.015 72); color: oklch(40% 0.022 62);">
                                             {{ $file->file_type }}
                                         </span>
                                         @if($file->file_size)
@@ -113,12 +113,12 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="flex items-center gap-2 shrink-0">
-                                    <a href="{{ route('texts.files.serve', ['text' => $text, 'filename' => basename($file->file_path)]) }}" target="_blank" class="text-xs font-medium text-blue-600 hover:text-blue-700">
+                                <div class="flex items-center gap-2 shrink-0 text-xs font-bold">
+                                    <a href="{{ route('texts.files.serve', ['text' => $text, 'filename' => basename($file->file_path)]) }}" target="_blank" style="color: oklch(40% 0.068 54);">
                                         Xem
                                     </a>
-                                    <span class="text-slate-300">|</span>
-                                    <button type="button" class="delete-file-btn text-xs font-medium text-rose-600 hover:text-rose-700" data-file-id="{{ $file->id }}">
+                                    <span style="color: oklch(89% 0.018 72);">|</span>
+                                    <button type="button" class="delete-file-btn" style="color: oklch(58% 0.140 24);" data-file-id="{{ $file->id }}">
                                         Xóa
                                     </button>
                                 </div>
@@ -129,24 +129,25 @@
             </div>
         </div>
 
-        <div id="comments" class="rounded-sm border border-slate-200 bg-white p-5 shadow-[0_18px_44px_-36px_rgba(15,23,42,0.35)]">
+        <div id="comments" class="rounded-2xl border p-5 shadow-sm" style="background: oklch(99.8% 0.003 75); border-color: oklch(89% 0.018 72);">
             <div class="mb-4">
-                <h2 class="text-lg font-semibold text-slate-900">Bình luận bài học</h2>
-                <p class="text-sm text-slate-500">{{ $comments->count() }} bình luận</p>
+                <h2 class="text-lg font-semibold" style="color: oklch(18% 0.020 58);">Bình luận thảo luận</h2>
+                <p class="text-xs" style="color: oklch(50% 0.025 65);">{{ $comments->count() }} bình luận</p>
             </div>
 
             <div class="space-y-3">
                 @forelse ($comments as $comment)
-                    <article class="rounded-sm border border-slate-200 bg-white p-4">
+                    <article class="rounded-xl border p-4" style="background: oklch(99.4% 0.005 78); border-color: oklch(90% 0.018 74);">
                         <div class="flex items-start gap-3">
-                            <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-blue-100 text-xs font-semibold uppercase text-blue-700">
+                            <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold uppercase"
+                                 style="background: oklch(92% 0.022 72); color: oklch(34% 0.042 60);">
                                 {{ \Illuminate\Support\Str::of($comment->user->name)->substr(0, 1) }}
                             </div>
                             <div class="min-w-0 flex-1">
-                                <div class="flex flex-wrap items-center justify-between gap-2">
-                                    <p class="text-sm font-semibold text-slate-800">{{ $comment->user->name }}</p>
+                                <div class="flex flex-wrap items-center justify-between gap-2 border-b pb-1.5" style="border-color: oklch(92% 0.016 74);">
+                                    <p class="text-xs font-bold" style="color: oklch(18% 0.020 58);">{{ $comment->user->name }}</p>
                                     <div class="flex items-center gap-3">
-                                        <p class="text-xs text-slate-500">{{ $comment->created_at?->format('H:i d/m/Y') }}</p>
+                                        <p class="text-[0.65rem]" style="color: oklch(50% 0.025 65);">{{ $comment->created_at?->format('H:i d/m/Y') }}</p>
                                         @auth
                                             @if (
                                                 auth()->user()->role === 'teacher'
@@ -155,7 +156,7 @@
                                                 <form method="POST" action="{{ route('texts.comments.destroy', [$text, $comment]) }}">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="text-xs font-medium text-rose-600 hover:text-rose-700">
+                                                    <button type="submit" class="text-[0.65rem] font-bold transition hover:opacity-85" style="color: oklch(58% 0.140 24);">
                                                         Xóa
                                                     </button>
                                                 </form>
@@ -163,13 +164,14 @@
                                         @endauth
                                     </div>
                                 </div>
-                                <p class="mt-2 whitespace-pre-line text-sm leading-6 text-slate-700">{{ $comment->content }}</p>
+                                <p class="mt-2 whitespace-pre-line text-xs md:text-sm leading-relaxed" style="color: oklch(30% 0.022 60);">{{ $comment->content }}</p>
                             </div>
                         </div>
                     </article>
                 @empty
-                    <div class="rounded-sm border border-dashed border-slate-300 bg-slate-50 px-4 py-5 text-center text-sm text-slate-500">
-                        Chưa có bình luận nào cho bài học này.
+                    <div class="rounded-xl border border-dashed p-6 text-center text-xs md:text-sm"
+                         style="background: oklch(99.4% 0.005 78 / 0.4); border-color: oklch(85% 0.020 72); color: oklch(50% 0.025 65);">
+                        Chưa có ý kiến thảo luận nào.
                     </div>
                 @endforelse
             </div>
@@ -181,21 +183,25 @@
                 <div class="docx-spinner-outer"></div>
                 <div class="docx-spinner-inner"></div>
             </div>
-            <h3 id="docx-loading-title" class="text-lg font-semibold text-white mb-2">Đang xử lý</h3>
-            <p id="docx-loading-text" class="text-sm text-slate-300">Vui lòng chờ trong giây lát...</p>
+            <h3 id="docx-loading-title" class="text-lg font-semibold mb-2" style="color:oklch(99.4% 0.005 78);">Đang xử lý</h3>
+            <p id="docx-loading-text" class="text-sm" style="color:oklch(80% 0.015 72);">Vui lòng chờ trong giây lát...</p>
         </div>
     </div>
 
     <!-- Modal xác nhận xóa link -->
     <dialog id="delete_link_modal" class="modal">
-        <div class="modal-box relative bg-white">
-            <h3 class="font-bold text-lg text-slate-900">Xác nhận gỡ bỏ</h3>
-            <p class="py-4 text-slate-600">Bạn có chắc chắn muốn gỡ bỏ liên kết này khỏi văn bản không?</p>
-            <div class="modal-action">
-                <form method="dialog">
-                    <button class="btn btn-sm !h-10 min-h-10 rounded-sm px-4 bg-slate-200 text-slate-800 hover:bg-slate-300 border-none">Hủy</button>
+        <div class="modal-box relative p-0 shadow-2xl" style="background: oklch(99.4% 0.005 78); border: 1px solid oklch(88% 0.020 72); border-radius: 16px;">
+            <div class="px-5 py-4" style="border-bottom: 1px solid oklch(90% 0.018 74);">
+                <h3 class="font-bold text-lg" style="color: oklch(18% 0.020 58);">Xác nhận gỡ bỏ</h3>
+            </div>
+            <div class="px-5 py-4 text-sm" style="color: oklch(44% 0.025 64);">
+                <p>Bạn có chắc chắn muốn gỡ bỏ liên kết này khỏi văn bản không?</p>
+            </div>
+            <div class="modal-action mt-0 px-5 py-4" style="border-top: 1px solid oklch(90% 0.018 74);">
+                <form method="dialog" class="m-0 flex gap-2">
+                    <button class="btn btn-sm !h-9 min-h-9 rounded-lg px-4 shadow-none transition" style="background: oklch(95% 0.012 75); border: 1px solid oklch(86% 0.020 72); color: oklch(36% 0.025 62);">Hủy</button>
+                    <button id="confirm_delete_link_btn" type="button" class="btn btn-error btn-sm !h-9 min-h-9 rounded-lg border-0 px-4 text-white shadow-none" style="background: oklch(58% 0.140 24);">Gỡ bỏ</button>
                 </form>
-                <button id="confirm_delete_link_btn" class="btn btn-error btn-sm !h-10 min-h-10 rounded-sm px-4 text-white hover:bg-rose-700">Gỡ bỏ</button>
             </div>
         </div>
         <form method="dialog" class="modal-backdrop">
@@ -205,14 +211,18 @@
 
     <!-- Modal xác nhận xóa file -->
     <dialog id="delete_file_modal" class="modal">
-        <div class="modal-box relative bg-white">
-            <h3 class="font-bold text-lg text-slate-900">Xác nhận xóa file</h3>
-            <p class="py-4 text-slate-600">Bạn có chắc chắn muốn xóa file đính kèm này không?</p>
-            <div class="modal-action">
-                <form method="dialog">
-                    <button class="btn btn-sm !h-10 min-h-10 rounded-sm px-4 bg-slate-200 text-slate-800 hover:bg-slate-300 border-none">Hủy</button>
+        <div class="modal-box relative p-0 shadow-2xl" style="background: oklch(99.4% 0.005 78); border: 1px solid oklch(88% 0.020 72); border-radius: 16px;">
+            <div class="px-5 py-4" style="border-bottom: 1px solid oklch(90% 0.018 74);">
+                <h3 class="font-bold text-lg" style="color: oklch(18% 0.020 58);">Xác nhận xóa file</h3>
+            </div>
+            <div class="px-5 py-4 text-sm" style="color: oklch(44% 0.025 64);">
+                <p>Bạn có chắc chắn muốn xóa file đính kèm này không?</p>
+            </div>
+            <div class="modal-action mt-0 px-5 py-4" style="border-top: 1px solid oklch(90% 0.018 74);">
+                <form method="dialog" class="m-0 flex gap-2">
+                    <button class="btn btn-sm !h-9 min-h-9 rounded-lg px-4 shadow-none transition" style="background: oklch(95% 0.012 75); border: 1px solid oklch(86% 0.020 72); color: oklch(36% 0.025 62);">Hủy</button>
+                    <button id="confirm_delete_file_btn" type="button" class="btn btn-error btn-sm !h-9 min-h-9 rounded-lg border-0 px-4 text-white shadow-none" style="background: oklch(58% 0.140 24);">Xóa</button>
                 </form>
-                <button id="confirm_delete_file_btn" class="btn btn-error btn-sm !h-10 min-h-10 rounded-sm px-4 text-white hover:bg-rose-700">Xóa</button>
             </div>
         </div>
         <form method="dialog" class="modal-backdrop">
@@ -302,9 +312,9 @@
             position: absolute;
             inset: 0;
             border-radius: 50%;
-            border: 4px solid rgba(59, 130, 246, 0.15);
-            border-top-color: #3b82f6;
-            border-right-color: #3b82f6;
+            border: 4px solid oklch(40% 0.068 54 / 0.15);
+            border-top-color: oklch(40% 0.068 54);
+            border-right-color: oklch(40% 0.068 54);
             animation: docx-spin 0.8s linear infinite;
         }
 
@@ -312,9 +322,9 @@
             position: absolute;
             inset: 12px;
             border-radius: 50%;
-            border: 3px solid rgba(99, 102, 241, 0.1);
-            border-bottom-color: #6366f1;
-            border-left-color: #6366f1;
+            border: 3px solid oklch(62% 0.040 66 / 0.15);
+            border-bottom-color: oklch(62% 0.040 66);
+            border-left-color: oklch(62% 0.040 66);
             animation: docx-spin-reverse 1.2s linear infinite;
         }
 

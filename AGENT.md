@@ -61,3 +61,12 @@
   - `GET /api/auth/me`
 - `login` là public endpoint.
 - `logout` và `me` yêu cầu `auth:sanctum`.
+
+## Chuẩn Giao Diện Quản Trị (Admin UI Reference)
+- Giao diện quản lý/quản trị chuẩn được tham chiếu tại trang quản lý văn bản:
+  - File Blade: [index.blade.php](file:///c:/Users/khanh/Projects/e-library/resources/views/texts/index.blade.php) (Tương ứng URL `/admin/texts`)
+- Các quy chuẩn thiết kế từ trang mẫu này để áp dụng cho các trang quản trị khác khi refactor:
+  - **Màu sắc & Phông chữ**: Kế thừa tông be-trắng cao cấp, phông chữ `Bahnschrift` cho UI hệ thống và `EB Garamond` cho tiêu đề bảng, nhãn nhóm.
+  - **Nhãn mức độ (Difficulty Badge)**: Hiển thị dạng chữ hoa thường tự nhiên (Sentence Case) như `Dễ`, `Trung bình`, `Khó` (bỏ `uppercase`), sử dụng class `whitespace-nowrap inline-block` để ngăn ngắt dòng.
+  - **Bộ phân trang (Pagination)**: Dùng bộ phân trang thông minh dynamic ellipsis (`< 1 2 … 5 … 10 >`) thông qua `data-pagination` và nạp module [pagination.js](file:///c:/Users/khanh/Projects/e-library/resources/js/library/pagination.js) thay vì render Laravel Blade `links()` mặc định.
+

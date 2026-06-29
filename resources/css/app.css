@@ -8,29 +8,37 @@
     default: true;
     prefersdark: false;
     color-scheme: light;
-    --color-base-100: oklch(99.2% 0.004 247.9);
-    --color-base-200: oklch(97.8% 0.006 247.9);
-    --color-base-300: oklch(94.8% 0.012 251.2);
-    --color-base-content: oklch(24.5% 0.02 255.4);
-    --color-primary: oklch(50.5% 0.17 259.2);
-    --color-primary-content: var(--color-white);
-    --color-secondary: oklch(71% 0.08 235);
-    --color-secondary-content: oklch(22% 0.02 255.4);
-    --color-accent: oklch(84% 0.03 245);
-    --color-accent-content: oklch(22% 0.02 255.4);
-    --color-neutral: oklch(28% 0.02 255.4);
-    --color-neutral-content: oklch(98.5% 0.004 247.9);
-    --color-info: oklch(73% 0.08 240);
-    --color-info-content: oklch(22% 0.02 255.4);
-    --color-success: oklch(74% 0.08 165);
-    --color-success-content: oklch(22% 0.02 255.4);
-    --color-warning: oklch(84% 0.11 85);
-    --color-warning-content: oklch(22% 0.02 255.4);
-    --color-error: oklch(68% 0.16 24);
-    --color-error-content: var(--color-white);
-    --radius-selector: 0.25rem;
-    --radius-field: 0.25rem;
-    --radius-box: 0.25rem;
+
+    /* ── Warm beige-white surface scale ── */
+    --color-base-100: oklch(99.4% 0.005 78);
+    --color-base-200: oklch(97.0% 0.010 76);
+    --color-base-300: oklch(93.5% 0.016 74);
+    --color-base-content: oklch(20% 0.022 60);
+
+    /* ── Accent: earthy brown ── */
+    --color-primary: oklch(40% 0.068 54);
+    --color-primary-content: oklch(98% 0.005 78);
+    --color-secondary: oklch(62% 0.040 66);
+    --color-secondary-content: oklch(18% 0.018 60);
+    --color-accent: oklch(88% 0.026 74);
+    --color-accent-content: oklch(22% 0.020 60);
+    --color-neutral: oklch(30% 0.022 60);
+    --color-neutral-content: oklch(97% 0.008 76);
+
+    /* ── Semantic ── */
+    --color-info: oklch(55% 0.080 230);
+    --color-info-content: oklch(98% 0.005 78);
+    --color-success: oklch(52% 0.090 155);
+    --color-success-content: oklch(98% 0.005 78);
+    --color-warning: oklch(62% 0.100 58);
+    --color-warning-content: oklch(18% 0.018 60);
+    --color-error: oklch(58% 0.140 24);
+    --color-error-content: oklch(98% 0.005 78);
+
+    /* ── Shape ── */
+    --radius-selector: 0.5rem;
+    --radius-field: 0.5rem;
+    --radius-box: 0.75rem;
     --border: 1px;
     --depth: 1;
     --noise: 0;
@@ -42,8 +50,15 @@
 @source '../**/*.js';
 
 @theme {
+    /* Admin / management pages */
     --font-sans: 'Bahnschrift', 'DIN Alternate', 'Segoe UI', ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Library / intro pages — Be Vietnam Pro: best Vietnamese coverage on Google Fonts */
+    --font-intro: 'Be Vietnam Pro', ui-sans-serif, system-ui, sans-serif;
+
+    /* Literary serif */
+    --font-serif: 'Lora', 'Georgia', ui-serif, serif;
 }
 
 @layer base {
@@ -56,15 +71,11 @@
         font-family: var(--font-sans);
     }
 
-    h1 {
-        @apply text-4xl font-semibold tracking-tight text-slate-950;
+    body[data-layout="library"] {
+        font-family: var(--font-intro);
     }
 
-    h2 {
-        @apply text-2xl font-semibold tracking-tight text-slate-950;
-    }
-
-    h3 {
-        @apply text-lg font-semibold text-slate-900;
-    }
+    h1 { @apply text-4xl font-semibold tracking-tight; color: oklch(16% 0.022 58); }
+    h2 { @apply text-2xl font-semibold tracking-tight; color: oklch(18% 0.020 60); }
+    h3 { @apply text-lg font-semibold;                 color: oklch(20% 0.018 62); }
 }

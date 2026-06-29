@@ -7,94 +7,121 @@
 
         @fonts
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+            :root {
+                --font-ui: 'Bahnschrift', 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
+                --font-serif: 'EB Garamond', 'Lora', 'Georgia', ui-serif, serif;
+                --g-primary: linear-gradient(145deg, oklch(44% 0.064 54) 0%, oklch(36% 0.056 50) 100%);
+            }
+
+            body {
+                font-family: var(--font-ui);
+                background: oklch(98.8% 0.004 76) !important;
+            }
+
+            .serif {
+                font-family: var(--font-serif);
+            }
+        </style>
     </head>
-    <body data-theme="library" class="bg-base-200">
-        <div class="flex min-h-screen flex-col" id="register-page-shell">
-            <main class="flex flex-1 items-center justify-center bg-base-200 px-4 py-8">
-                <section class="w-full max-w-md rounded-sm border border-slate-200 bg-white shadow-[0_24px_60px_-40px_rgba(15,23,42,0.35)]">
-                    <div class="p-6 sm:p-8">
-                        <div class="space-y-2">
-                            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-blue-600">Đăng ký</p>
-                            <h1 class="text-2xl font-semibold text-slate-900">Tạo tài khoản mới</h1>
-                            <p class="text-sm leading-6 text-slate-500">Vui lòng nhập đầy đủ thông tin dưới đây để tiếp tục.</p>
-                        </div>
+    <body data-theme="library" class="flex min-h-screen items-center justify-center px-4 py-8">
+        <div class="w-full max-w-md rounded-2xl border p-6 sm:p-8 shadow-sm" 
+             style="background: oklch(99.8% 0.003 75); border-color: oklch(89% 0.018 72);">
+            
+            {{-- ─── HEADER ─── --}}
+            <div class="space-y-2 pb-4 border-b" style="border-color: oklch(90% 0.018 74);">
+                <p class="text-xs font-bold uppercase tracking-[0.18em]" style="color: oklch(44% 0.064 54);">Đăng ký</p>
+                <h1 class="text-2xl font-bold" style="color: oklch(18% 0.020 58);">Tạo tài khoản mới</h1>
+                <p class="text-sm font-serif italic" style="color: oklch(46% 0.018 58);">Vui lòng nhập đầy đủ thông tin dưới đây để tiếp tục.</p>
+            </div>
 
-                        @if ($errors->any())
-                            <div class="mt-6 rounded-sm border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-700">
-                                {{ $errors->first() }}
-                            </div>
-                        @endif
+            {{-- ─── NOTIFICATION ─── --}}
+            @if ($errors->any())
+                <div class="mt-6 rounded-xl border px-3 py-2 text-sm"
+                     style="background: oklch(72% 0.090 42 / 0.1); border-color: oklch(72% 0.090 42 / 0.25); color: oklch(38% 0.080 42);">
+                    {{ $errors->first() }}
+                </div>
+            @endif
 
-                        <form method="POST" action="{{ route('register.store') }}" class="mt-8 space-y-5" novalidate>
-                            @csrf
+            {{-- ─── FORM ─── --}}
+            <form method="POST" action="{{ route('register.store') }}" class="mt-6 space-y-5" novalidate>
+                @csrf
 
-                            <div class="space-y-2">
-                                <label for="name" class="block text-sm font-medium text-slate-700">Họ và tên</label>
-                                <input
-                                    id="name"
-                                    type="text"
-                                    name="name"
-                                    value="{{ old('name') }}"
-                                    required
-                                    autocomplete="name"
-                                    placeholder="Nhập họ và tên của bạn"
-                                    class="input h-11 w-full rounded-sm border border-slate-200 bg-slate-50 text-slate-800 shadow-none outline-none placeholder:text-slate-400 focus:border-blue-400"
-                                />
-                            </div>
+                <div class="space-y-2">
+                    <label for="name" class="block text-xs font-bold" style="color: oklch(34% 0.025 64);">Họ và tên</label>
+                    <input
+                        id="name"
+                        type="text"
+                        name="name"
+                        value="{{ old('name') }}"
+                        required
+                        autocomplete="name"
+                        placeholder="Nhập họ và tên của bạn"
+                        class="input h-11 w-full rounded-xl border text-sm shadow-none focus:outline-none"
+                        style="border-color: oklch(86% 0.020 72); background: oklch(97% 0.010 76); color: oklch(20% 0.022 60);"
+                    />
+                </div>
 
-                            <div class="space-y-2">
-                                <label for="email" class="block text-sm font-medium text-slate-700">Email</label>
-                                <input
-                                    id="email"
-                                    type="email"
-                                    name="email"
-                                    value="{{ old('email') }}"
-                                    required
-                                    autocomplete="email"
-                                    placeholder="Nhập email của bạn"
-                                    class="input h-11 w-full rounded-sm border border-slate-200 bg-slate-50 text-slate-800 shadow-none outline-none placeholder:text-slate-400 focus:border-blue-400"
-                                />
-                            </div>
+                <div class="space-y-2">
+                    <label for="email" class="block text-xs font-bold" style="color: oklch(34% 0.025 64);">Địa chỉ Email</label>
+                    <input
+                        id="email"
+                        type="email"
+                        name="email"
+                        value="{{ old('email') }}"
+                        required
+                        autocomplete="email"
+                        placeholder="Nhập email của bạn"
+                        class="input h-11 w-full rounded-xl border text-sm shadow-none focus:outline-none"
+                        style="border-color: oklch(86% 0.020 72); background: oklch(97% 0.010 76); color: oklch(20% 0.022 60);"
+                    />
+                </div>
 
-                            <div class="space-y-2">
-                                <label for="password" class="block text-sm font-medium text-slate-700">Mật khẩu</label>
-                                <input
-                                    id="password"
-                                    type="password"
-                                    name="password"
-                                    required
-                                    placeholder="Nhập mật khẩu (tối thiểu 8 ký tự)"
-                                    class="input h-11 w-full rounded-sm border border-slate-200 bg-slate-50 text-slate-800 shadow-none outline-none placeholder:text-slate-400 focus:border-blue-400"
-                                />
-                            </div>
+                <div class="space-y-2">
+                    <label for="password" class="block text-xs font-bold" style="color: oklch(34% 0.025 64);">Mật khẩu</label>
+                    <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        required
+                        placeholder="Nhập mật khẩu (tối thiểu 8 ký tự)"
+                        class="input h-11 w-full rounded-xl border text-sm shadow-none focus:outline-none"
+                        style="border-color: oklch(86% 0.020 72); background: oklch(97% 0.010 76); color: oklch(20% 0.022 60);"
+                    />
+                </div>
 
-                            <div class="space-y-2">
-                                <label for="password_confirmation" class="block text-sm font-medium text-slate-700">Nhập lại mật khẩu</label>
-                                <input
-                                    id="password_confirmation"
-                                    type="password"
-                                    name="password_confirmation"
-                                    required
-                                    placeholder="Xác nhận lại mật khẩu của bạn"
-                                    class="input h-11 w-full rounded-sm border border-slate-200 bg-slate-50 text-slate-800 shadow-none outline-none placeholder:text-slate-400 focus:border-blue-400"
-                                />
-                            </div>
+                <div class="space-y-2">
+                    <label for="password_confirmation" class="block text-xs font-bold" style="color: oklch(34% 0.025 64);">Nhập lại mật khẩu</label>
+                    <input
+                        id="password_confirmation"
+                        type="password"
+                        name="password_confirmation"
+                        required
+                        placeholder="Xác nhận lại mật khẩu của bạn"
+                        class="input h-11 w-full rounded-xl border text-sm shadow-none focus:outline-none"
+                        style="border-color: oklch(86% 0.020 72); background: oklch(97% 0.010 76); color: oklch(20% 0.022 60);"
+                    />
+                </div>
 
-                            <button
-                                type="submit"
-                                class="btn btn-primary h-11 w-full rounded-sm border-0 px-4 text-sm font-medium text-white shadow-none mt-2"
-                            >
-                                Đăng ký tài khoản
-                            </button>
+                <button
+                    type="submit"
+                    class="btn h-11 w-full rounded-xl border-0 text-sm font-bold text-white shadow-none transition mt-2"
+                    style="background: var(--g-primary);"
+                    onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'"
+                >
+                    Đăng ký tài khoản
+                </button>
 
-                            <div class="text-center text-sm text-slate-500 mt-4 pt-2">
-                                Đã có tài khoản? 
-                                <a href="{{ route('login') }}" class="font-medium text-blue-600 hover:text-blue-500 transition-colors">Đăng nhập ngay</a>
-                            </div>
-                        </form>
-                    </div>
-                </section>
-            </main>
+                <div class="text-center text-sm mt-6 pt-4 border-t" style="border-color: oklch(90% 0.018 74); color: oklch(46% 0.018 58);">
+                    Đã có tài khoản? 
+                    <a href="{{ route('login') }}" class="font-bold hover:underline transition-all" style="color: oklch(40% 0.068 54);">
+                        Đăng nhập ngay
+                    </a>
+                </div>
+            </form>
         </div>
     </body>
 </html>

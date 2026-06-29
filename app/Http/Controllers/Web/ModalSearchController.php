@@ -20,11 +20,8 @@ class ModalSearchController extends Controller
         }
 
         $user = $request->user();
-        if ($user === null) {
-            abort(403);
-        }
 
-        if ($user->role === 'user') {
+        if ($user === null || $user->role === 'user') {
             $texts = Text::query()
                 ->where('name', 'like', '%' . $keyword . '%')
                 ->orderBy('name')

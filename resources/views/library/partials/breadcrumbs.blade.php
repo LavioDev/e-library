@@ -33,18 +33,18 @@
 @endphp
 
 <nav class="mb-4 overflow-x-auto text-sm" aria-label="Breadcrumb">
-    <div class="text-slate-600">
+    <div style="color: oklch(45% 0.025 65);">
         <ul class="flex items-center gap-2 whitespace-nowrap">
             @foreach ($items as $item)
                 <li class="inline-flex items-center gap-2">
                     @if (!$loop->first)
-                        <span class="text-slate-400">&gt;</span>
+                        <span style="color: oklch(72% 0.015 72);">&gt;</span>
                     @endif
 
                     @if ($loop->last || empty($item['url']))
-                        <span class="font-medium text-slate-900">{{ $item['label'] }}</span>
+                        <span class="font-semibold" style="color: oklch(18% 0.020 58);">{{ $item['label'] }}</span>
                     @else
-                        <a href="{{ $item['url'] }}" class="hover:text-blue-700">{{ $item['label'] }}</a>
+                        <a href="{{ $item['url'] }}" class="transition-colors hover:text-primary">{{ $item['label'] }}</a>
                     @endif
                 </li>
             @endforeach

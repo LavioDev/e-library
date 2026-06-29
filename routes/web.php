@@ -39,8 +39,9 @@ Route::middleware('auth')->group(function (): void {
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     Route::post('/texts/{text}/comments', [TextCommentController::class, 'store'])->name('texts.comments.store');
     Route::delete('/texts/{text}/comments/{comment}', [TextCommentController::class, 'destroy'])->name('texts.comments.destroy');
-    Route::get('/search/modal', ModalSearchController::class)->name('search.modal');
 });
+
+Route::get('/search/modal', ModalSearchController::class)->name('search.modal');
 
 
 Route::middleware(['auth', 'user'])->group(function (): void {
