@@ -75,9 +75,9 @@
                                     @endif
                                 </div>
                                 <div class="mt-2 flex justify-end">
-                                    <button type="button" class="delete-link-btn inline-flex items-center rounded-sm bg-rose-600 px-3 py-1.5 text-xs font-semibold text-white shadow transition-colors duration-200 hover:bg-rose-700" data-id="{{ $link->id }}" title="Gỡ bỏ">
-                                        Xóa
-                                    </button>
+                                     <button type="button" class="delete-link-btn inline-flex items-center rounded-xl px-3 py-1.5 text-xs font-semibold text-white shadow transition hover:opacity-90" style="background: oklch(58% 0.140 24);" data-id="{{ $link->id }}" title="Gỡ bỏ">
+                                         Xóa
+                                     </button>
                                 </div>
                             </div>
                         @endif
@@ -422,27 +422,27 @@
                 const sizeKb = file.file_size ? (file.file_size / 1024).toFixed(1) + ' KB' : '0 KB';
                 const serveUrl = `{{ route('texts.files.serve', ['text' => $text, 'filename' => ':filename']) }}`.replace(':filename', file.file_path.split('/').pop());
                 return `
-                    <div class="flex items-center justify-between rounded-sm border border-slate-200 bg-slate-50 p-3" data-file-id="${file.id}">
+                    <div class="flex items-center justify-between rounded-xl border p-3" style="background: oklch(98.5% 0.005 78 / 0.5); border-color: oklch(90% 0.018 74);" data-file-id="${file.id}">
                         <div class="min-w-0 flex-1 pr-3">
-                            <p class="truncate text-sm font-medium text-slate-800" title="${file.file_name}">
+                            <p class="truncate text-sm font-semibold" style="color: oklch(24% 0.020 58);" title="${file.file_name}">
                                 ${file.file_name}
                             </p>
-                            <div class="mt-1 flex items-center gap-2 text-xs text-slate-500">
-                                <span class="rounded bg-slate-200 px-1.5 py-0.5 font-semibold uppercase text-slate-600">
+                            <div class="mt-1 flex items-center gap-2 text-xs" style="color: oklch(50% 0.025 65);">
+                                <span class="rounded bg-slate-200 px-1.5 py-0.5 font-bold uppercase" style="background: oklch(92% 0.015 72); color: oklch(40% 0.022 62);">
                                     ${file.file_type}
                                 </span>
                                 <span>•</span>
                                 <span>${sizeKb}</span>
                             </div>
                         </div>
-                        <div class="flex items-center gap-2 shrink-0">
-                            <a href="${serveUrl}" target="_blank" class="text-xs font-medium text-blue-600 hover:text-blue-700">
+                        <div class="flex items-center gap-2 shrink-0 text-xs font-bold">
+                            <a href="${serveUrl}" target="_blank" style="color: oklch(40% 0.068 54);">
                                 Xem
                             </a>
-                            <span class="text-slate-300">|</span>
-                            <button type="button" class="delete-file-btn text-xs font-medium text-rose-600 hover:text-rose-700" data-file-id="${file.id}">
-                                Xóa
-                            </button>
+                            <span style="color: oklch(89% 0.018 72);">|</span>
+                             <button type="button" class="delete-file-btn hover:opacity-85" style="color: oklch(58% 0.140 24);" data-file-id="${file.id}">
+                                 Xóa
+                             </button>
                         </div>
                     </div>`;
             };
@@ -618,7 +618,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-2 flex justify-end">
-                                    <button type="button" class="delete-link-btn inline-flex items-center rounded-sm bg-rose-600 px-3 py-1.5 text-xs font-semibold text-white shadow transition-colors duration-200 hover:bg-rose-700" data-id="${id}" title="Gỡ bỏ">
+                                    <button type="button" class="delete-link-btn inline-flex items-center rounded-xl px-3 py-1.5 text-xs font-semibold text-white shadow transition hover:opacity-90" style="background: oklch(58% 0.140 24);" data-id="${id}" title="Gỡ bỏ">
                                         Xóa
                                     </button>
                                 </div>
@@ -639,7 +639,7 @@
                                     ${driveEmbed}
                                 </div>
                                 <div class="mt-2 flex justify-end">
-                                    <button type="button" class="delete-link-btn inline-flex items-center rounded-sm bg-rose-600 px-3 py-1.5 text-xs font-semibold text-white shadow transition-colors duration-200 hover:bg-rose-700" data-id="${id}" title="Gỡ bỏ">
+                                    <button type="button" class="delete-link-btn inline-flex items-center rounded-xl px-3 py-1.5 text-xs font-semibold text-white shadow transition hover:opacity-90" style="background: oklch(58% 0.140 24);" data-id="${id}" title="Gỡ bỏ">
                                         Xóa
                                     </button>
                                 </div>

@@ -119,11 +119,7 @@
                                         <form method="POST" action="{{ route('admin.reading-classes.destroy', $readingClass) }}" data-confirm-delete="true" data-confirm-message="Xóa Nhiệm vụ đọc hiểu này?">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-ghost btn-sm rounded-xl border px-3 shadow-none transition"
-                                                    style="border-color: oklch(76% 0.080 42 / 0.25); background: oklch(99.4% 0.005 78); color: oklch(38% 0.080 42);"
-                                                    onmouseover="this.style.background='oklch(95% 0.020 40)'" onmouseout="this.style.background=''">
-                                                Xóa
-                                            </button>
+                                            <button type="submit" class="btn btn-sm rounded-xl border-0 px-3 text-white shadow-none" style="background: oklch(58% 0.140 24);">Xóa</button>
                                         </form>
                                     </div>
                                 </td>

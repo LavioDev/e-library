@@ -210,7 +210,7 @@
                     <button type="button" id="confirm-delete-cancel" class="btn btn-sm !h-9 min-h-9 rounded-lg px-4 shadow-none" style="background:oklch(95% 0.012 75); border:1px solid oklch(86% 0.020 72); color:oklch(36% 0.025 62);">
                         Hủy
                     </button>
-                    <button type="button" id="confirm-delete-submit" class="btn btn-sm !h-9 min-h-9 rounded-lg border-0 px-4 text-white shadow-none" style="background:oklch(58% 0.140 24); hover:background:oklch(50% 0.140 24);">
+                    <button type="button" id="confirm-delete-submit" class="btn btn-sm !h-9 min-h-9 rounded-lg border-0 px-4 text-white shadow-none transition hover:opacity-90" style="background: oklch(58% 0.140 24);">
                         Xóa
                     </button>
                 </div>

@@ -187,7 +187,9 @@
 
 .lib-hero-sub {
     font-size: 0.90rem;
-    line-height: 1.75;
+    line-height: 2.2;
+    font-style: italic;
+    text-align: justify;
     color: var(--tx-muted);
     max-width: 54rem;
     font-weight: 400;
