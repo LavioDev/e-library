@@ -27,7 +27,8 @@ RUN { \
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 COPY composer.json composer.lock ./
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader --no-scripts
+RUN composer config -g http2 false \
+    && composer install --no-interaction --no-dev --prefer-dist --optimize-autoloader --no-scripts
 
 COPY package.json package-lock.json ./
 RUN npm ci
