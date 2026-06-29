@@ -15,9 +15,9 @@
 @endsection
 
 @section('content')
-    <section class="space-y-4">
+    <section class="space-y-6">
         {{-- Div thao tác trên cùng --}}
-        <div class="rounded-sm border border-slate-200 bg-white p-5 shadow-[0_18px_44px_-36px_rgba(15,23,42,0.35)]">
+        <div class="rounded-2xl border p-5 shadow-sm" style="background: oklch(99.8% 0.003 75); border-color: oklch(89% 0.018 72);">
             <div class="flex flex-wrap items-center justify-between gap-4">
                 <!-- Left side: Tabs vertically centered -->
                 <div class="flex items-center gap-1">
@@ -25,7 +25,8 @@
                         <button
                             type="button"
                             data-tab-trigger="texts"
-                            class="tab-btn px-4 py-2.5 text-sm font-semibold border-b-2 border-blue-600 text-blue-600 transition-colors focus:outline-none"
+                            class="tab-btn px-4 py-2.5 text-sm font-bold border-b-2 transition-colors focus:outline-none"
+                            style="border-color: oklch(44% 0.064 54); color: oklch(44% 0.064 54);"
                         >
                             Văn bản
                         </button>
@@ -41,14 +42,15 @@
 
                 <!-- Right side: Text, dropdown input, and button matching view mẫu style -->
                 <div class="flex flex-wrap items-center gap-3">
-                    <span class="text-sm font-medium text-slate-700">
-                        Nhóm: <span class="font-semibold text-slate-900">{{ $class->name }}</span>
+                    <span class="text-sm font-medium" style="color: oklch(34% 0.025 64);">
+                        Nhóm: <span class="font-bold" style="color: oklch(18% 0.020 58);">{{ $class->name }}</span>
                     </span>
                     
                     <div id="topic-filter-wrapper" class="w-64 shrink-0">
                         <select
                             id="topic-filter"
-                            class="select select-sm !h-10 min-h-10 w-full rounded-sm border border-slate-200 bg-white text-sm text-slate-800 shadow-none focus:outline-none"
+                            class="select select-sm !h-10 min-h-10 w-full rounded-xl border text-sm shadow-none focus:outline-none"
+                            style="border-color: oklch(86% 0.020 72); background: oklch(97% 0.010 76); color: oklch(20% 0.022 60);"
                         >
                             <option value="all">Tất cả loại văn bản</option>
                             @foreach ($class->texts->pluck('textTopic')->filter()->unique('id') as $topic)
@@ -59,7 +61,9 @@
 
                     <a
                         href="{{ route('user.reading-classes.index') }}"
-                        class="btn btn-ghost btn-sm !h-10 min-h-10 rounded-sm border border-slate-200 bg-white px-4 text-slate-700 shadow-none hover:bg-slate-50 text-sm"
+                        class="btn btn-ghost btn-sm !h-10 min-h-10 rounded-xl border px-4 shadow-none transition"
+                        style="border-color: oklch(86% 0.020 72); background: oklch(99.4% 0.005 78); color: oklch(34% 0.022 62);"
+                        onmouseover="this.style.background='oklch(95% 0.012 75)'" onmouseout="this.style.background=''"
                     >
                         Quay lại
                     </a>
@@ -68,16 +72,16 @@
         </div>
 
         {{-- TAB: Văn bản --}}
-        <div id="tab-content-texts" class="tab-panel overflow-hidden rounded-sm border border-slate-200 bg-white shadow-[0_18px_44px_-36px_rgba(15,23,42,0.35)]">
+        <div id="tab-content-texts" class="tab-panel overflow-hidden rounded-2xl border shadow-sm" style="border-color: oklch(89% 0.018 72); background: white;">
             <div class="overflow-x-auto">
                 <table class="table w-full">
-                    <thead class="bg-slate-50 text-slate-600 text-sm">
+                    <thead style="background: oklch(97% 0.010 76); color: oklch(30% 0.022 60); border-bottom: 1px solid oklch(89% 0.018 72);">
                         <tr>
-                            <th class="font-semibold text-slate-700 py-3.5 px-5 text-left">Tên văn bản</th>
-                            <th class="font-semibold text-slate-700 py-3.5 px-5 text-left">Tác giả</th>
-                            <th class="font-semibold text-slate-700 py-3.5 px-5 text-left">Chủ đề</th>
-                            <th class="font-semibold text-slate-700 py-3.5 px-5 text-left">Độ khó</th>
-                            <th class="font-semibold text-slate-700 py-3.5 px-5 text-right">Thao tác</th>
+                            <th class="font-bold py-3.5 px-5 text-left">Tên văn bản</th>
+                            <th class="font-bold py-3.5 px-5 text-left">Tác giả</th>
+                            <th class="font-bold py-3.5 px-5 text-left">Chủ đề</th>
+                            <th class="font-bold py-3.5 px-5 text-left">Độ khó</th>
+                            <th class="font-bold py-3.5 px-5 text-right">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
@@ -89,38 +93,41 @@
                                     'hard' => 'Khó',
                                     default => 'Chưa rõ',
                                 };
-                                $diffClass = match ($text->difficulty) {
-                                    'easy' => 'bg-emerald-50 text-emerald-700 border-emerald-200',
-                                    'medium' => 'bg-blue-50 text-blue-700 border-blue-200',
-                                    'hard' => 'bg-rose-50 text-rose-700 border-rose-200',
-                                    default => 'bg-slate-50 text-slate-600 border-slate-200',
+                                $diffStyle = match ($text->difficulty) {
+                                    'easy' => 'background: oklch(52% 0.090 155 / 0.15); color: oklch(30% 0.070 155);',
+                                    'medium' => 'background: oklch(62% 0.090 240 / 0.15); color: oklch(35% 0.080 240);',
+                                    'hard' => 'background: oklch(72% 0.090 42 / 0.15); color: oklch(38% 0.080 42);',
+                                    default => 'background: oklch(80% 0.010 70 / 0.2); color: oklch(46% 0.018 58);',
                                 };
                             @endphp
                             <tr
                                 data-text-row="1"
                                 data-topic-id="{{ $text->text_topic_id ?? 'none' }}"
                                 class="hover:bg-slate-50/60 transition-colors"
+                                style="border-bottom: 1px solid oklch(92% 0.016 74);"
                             >
-                                <td class="py-3.5 px-5 font-medium text-slate-900 text-sm">
-                                    <a href="{{ route('texts.content.show', $text) }}" class="hover:text-blue-600 transition-colors">
+                                <td class="py-3.5 px-5 font-semibold text-sm">
+                                    <a href="{{ route('texts.content.show', $text) }}" class="hover:opacity-80 transition" style="color: oklch(18% 0.020 58);">
                                         {{ $text->name }}
                                     </a>
                                 </td>
-                                <td class="py-3.5 px-5 text-slate-600 text-sm">
+                                <td class="py-3.5 px-5 text-sm font-medium" style="color: oklch(34% 0.025 64);">
                                     {{ $text->author ?: 'Chưa rõ' }}
                                 </td>
-                                <td class="py-3.5 px-5 text-slate-600 text-sm">
+                                <td class="py-3.5 px-5 text-sm" style="color: oklch(34% 0.025 64);">
                                     {{ $text->textTopic?->name ?: '—' }}
                                 </td>
                                 <td class="py-3.5 px-5 text-sm">
-                                    <span class="badge badge-sm border {{ $diffClass }} rounded-sm px-2 py-0.5 font-medium">
+                                    <span class="rounded-lg px-2.5 py-0.5 text-xs font-bold whitespace-nowrap inline-block" style="{{ $diffStyle }}">
                                         {{ $diffLabel }}
                                     </span>
                                 </td>
                                 <td class="py-3.5 px-5 text-right">
                                     <a
                                         href="{{ route('texts.content.show', $text) }}"
-                                        class="btn btn-ghost btn-sm !h-9 min-h-9 rounded-sm border border-slate-200 bg-white px-4 text-slate-700 shadow-none hover:bg-slate-50 text-xs"
+                                        class="btn btn-ghost btn-sm !h-9 min-h-9 rounded-xl border px-4 shadow-none transition"
+                                        style="border-color: oklch(86% 0.020 72); background: oklch(99.4% 0.005 78); color: oklch(34% 0.022 62);"
+                                        onmouseover="this.style.background='oklch(95% 0.012 75)'" onmouseout="this.style.background=''"
                                     >
                                         Đọc bài
                                     </a>
@@ -128,7 +135,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="py-12 text-center text-slate-500 text-sm font-medium">
+                                <td colspan="5" class="py-12 text-center text-sm font-medium" style="color: oklch(46% 0.018 58);">
                                     Nhiệm vụ đọc hiểu này chưa có văn bản nào.
                                 </td>
                             </tr>
@@ -136,7 +143,7 @@
                         
                         {{-- Empty filter state --}}
                         <tr id="filter-empty-state" class="hidden">
-                            <td colspan="5" class="py-12 text-center text-slate-500 text-sm font-medium">
+                            <td colspan="5" class="py-12 text-center text-sm font-medium" style="color: oklch(46% 0.018 58);">
                                 Không tìm thấy văn bản phù hợp.
                             </td>
                         </tr>
@@ -146,18 +153,18 @@
         </div>
 
         {{-- TAB: Bộ câu hỏi --}}
-        <div id="tab-content-assignments" class="tab-panel hidden overflow-hidden rounded-sm border border-slate-200 bg-white shadow-[0_18px_44px_-36px_rgba(15,23,42,0.35)]">
+        <div id="tab-content-assignments" class="tab-panel hidden overflow-hidden rounded-2xl border shadow-sm" style="border-color: oklch(89% 0.018 72); background: white;">
             <div class="overflow-x-auto">
                 <table class="table w-full">
-                    <thead class="bg-slate-50 text-slate-600 text-sm">
+                    <thead style="background: oklch(97% 0.010 76); color: oklch(30% 0.022 60); border-bottom: 1px solid oklch(89% 0.018 72);">
                         <tr>
-                            <th class="font-semibold text-slate-700 py-3.5 px-5 text-left">Tiêu đề bộ câu hỏi</th>
-                            <th class="font-semibold text-slate-700 py-3.5 px-5 text-left">Số câu hỏi</th>
-                            <th class="font-semibold text-slate-700 py-3.5 px-5 text-left">Hạn nộp</th>
-                            <th class="font-semibold text-slate-700 py-3.5 px-5 text-left">Trạng thái bộ câu hỏi</th>
-                            <th class="font-semibold text-slate-700 py-3.5 px-5 text-left">Trạng thái làm bài</th>
-                            <th class="font-semibold text-slate-700 py-3.5 px-5 text-left">Điểm số</th>
-                            <th class="font-semibold text-slate-700 py-3.5 px-5 text-right">Thao tác</th>
+                            <th class="font-bold py-3.5 px-5 text-left">Tiêu đề bộ câu hỏi</th>
+                            <th class="font-bold py-3.5 px-5 text-left">Số câu hỏi</th>
+                            <th class="font-bold py-3.5 px-5 text-left">Hạn nộp</th>
+                            <th class="font-bold py-3.5 px-5 text-left">Trạng thái bộ câu hỏi</th>
+                            <th class="font-bold py-3.5 px-5 text-left">Trạng thái làm bài</th>
+                            <th class="font-bold py-3.5 px-5 text-left">Điểm số</th>
+                            <th class="font-bold py-3.5 px-5 text-right">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
@@ -171,51 +178,51 @@
 
                                 if ($isOpen) {
                                     $statusLabel = 'Đang mở';
-                                    $statusClass = 'border-emerald-200 bg-emerald-50 text-emerald-700';
+                                    $statusStyle = 'background: oklch(52% 0.090 155 / 0.15); color: oklch(30% 0.070 155);';
                                 } elseif ($isUpcoming) {
                                     $statusLabel = 'Sắp mở';
-                                    $statusClass = 'border-amber-200 bg-amber-50 text-amber-700';
+                                    $statusStyle = 'background: oklch(72% 0.090 42 / 0.15); color: oklch(38% 0.080 42);';
                                 } else {
                                     $statusLabel = 'Đã đóng';
-                                    $statusClass = 'border-rose-200 bg-rose-50 text-rose-700';
+                                    $statusStyle = 'background: oklch(80% 0.010 70 / 0.2); color: oklch(46% 0.018 58);';
                                 }
 
                                 $submissionLabel = null;
-                                $submissionClass = '';
+                                $submissionStyle = '';
                                 if ($latestSubmission) {
-                                    [$submissionLabel, $submissionClass] = match ($latestSubmission->status) {
-                                        'draft' => ['Đang làm dở', 'border-sky-200 bg-sky-50 text-sky-700'],
-                                        'submitted' => ['Đã nộp', 'border-teal-200 bg-teal-50 text-teal-700'],
-                                        'graded' => ['Đã chấm', 'border-indigo-200 bg-indigo-50 text-indigo-700'],
+                                    [$submissionLabel, $submissionStyle] = match ($latestSubmission->status) {
+                                        'draft' => ['Đang làm dở', 'background: oklch(62% 0.090 240 / 0.15); color: oklch(35% 0.080 240);'],
+                                        'submitted' => ['Đã nộp', 'background: oklch(52% 0.090 155 / 0.15); color: oklch(30% 0.070 155);'],
+                                        'graded' => ['Đã chấm', 'background: oklch(62% 0.090 270 / 0.15); color: oklch(35% 0.080 270);'],
                                         default => [null, ''],
                                     };
                                 }
                             @endphp
-                            <tr class="hover:bg-slate-50/60 transition-colors">
-                                <td class="py-3.5 px-5 font-medium text-slate-900 text-sm">
+                            <tr class="hover:bg-slate-50/60 transition-colors" style="border-bottom: 1px solid oklch(92% 0.016 74);">
+                                <td class="py-3.5 px-5 font-semibold text-sm" style="color: oklch(18% 0.020 58);">
                                     {{ $assignment->title }}
                                 </td>
-                                <td class="py-3.5 px-5 text-slate-600 text-sm">
+                                <td class="py-3.5 px-5 text-sm" style="color: oklch(34% 0.025 64);">
                                     {{ $assignment->questions->count() }} câu hỏi
                                 </td>
-                                <td class="py-3.5 px-5 text-slate-600 text-sm">
+                                <td class="py-3.5 px-5 text-sm" style="color: oklch(34% 0.025 64);">
                                     {{ $assignment->due_at?->format('H:i d/m/Y') ?? 'Không giới hạn' }}
                                 </td>
                                 <td class="py-3.5 px-5 text-sm">
-                                    <span class="badge badge-sm border {{ $statusClass }} rounded-sm px-2 py-0.5 font-medium">
+                                    <span class="rounded-lg px-2.5 py-0.5 text-xs font-bold whitespace-nowrap inline-block" style="{{ $statusStyle }}">
                                         {{ $statusLabel }}
                                     </span>
                                 </td>
                                 <td class="py-3.5 px-5 text-sm">
                                     @if ($submissionLabel)
-                                        <span class="badge badge-sm border {{ $submissionClass }} rounded-sm px-2 py-0.5 font-medium">
+                                        <span class="rounded-lg px-2.5 py-0.5 text-xs font-bold whitespace-nowrap inline-block" style="{{ $submissionStyle }}">
                                             {{ $submissionLabel }}
                                         </span>
                                     @else
                                         <span class="text-slate-400">—</span>
                                     @endif
                                 </td>
-                                <td class="py-3.5 px-5 text-sm font-semibold text-blue-600">
+                                <td class="py-3.5 px-5 text-sm font-bold" style="color: oklch(40% 0.068 54);">
                                     @if ($latestSubmission && $latestSubmission->status === 'graded')
                                         {{ rtrim(rtrim((string) $latestSubmission->total_score, '0'), '.') }} / {{ rtrim(rtrim((string) $assignment->questions->sum('max_score'), '0'), '.') }}
                                     @else
@@ -227,33 +234,39 @@
                                         @if ($latestSubmission && $latestSubmission->status === 'graded')
                                             <a
                                                 href="{{ route('user.reading-classes.assignments.take', ['readingClass' => $class->id, 'assignment' => $assignment->id]) }}"
-                                                class="btn btn-ghost btn-sm !h-9 min-h-9 rounded-sm border border-slate-200 bg-white px-4 text-slate-700 shadow-none hover:bg-slate-50 text-xs"
+                                                class="btn btn-ghost btn-sm !h-9 min-h-9 rounded-xl border px-4 shadow-none transition"
+                                                style="border-color: oklch(86% 0.020 72); background: oklch(99.4% 0.005 78); color: oklch(34% 0.022 62);"
+                                                onmouseover="this.style.background='oklch(95% 0.012 75)'" onmouseout="this.style.background=''"
                                             >
                                                 Xem kết quả
                                             </a>
                                         @elseif ($latestSubmission && $latestSubmission->status === 'submitted')
                                             <a
                                                 href="{{ route('user.reading-classes.assignments.take', ['readingClass' => $class->id, 'assignment' => $assignment->id]) }}"
-                                                class="btn btn-ghost btn-sm !h-9 min-h-9 rounded-sm border border-slate-200 bg-white px-4 text-slate-700 shadow-none hover:bg-slate-50 text-xs"
+                                                class="btn btn-ghost btn-sm !h-9 min-h-9 rounded-xl border px-4 shadow-none transition"
+                                                style="border-color: oklch(86% 0.020 72); background: oklch(99.4% 0.005 78); color: oklch(34% 0.022 62);"
+                                                onmouseover="this.style.background='oklch(95% 0.012 75)'" onmouseout="this.style.background=''"
                                             >
                                                 Xem bài làm
                                             </a>
                                         @else
                                             <a
                                                 href="{{ route('user.reading-classes.assignments.take', ['readingClass' => $class->id, 'assignment' => $assignment->id]) }}"
-                                                class="btn btn-sm !h-9 min-h-9 rounded-sm border-0 bg-blue-600 px-4 text-white shadow-none hover:bg-blue-700 text-xs"
+                                                class="btn btn-sm !h-9 min-h-9 rounded-xl border-0 px-4 text-white shadow-none transition"
+                                                style="background: var(--g-primary);"
+                                                onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'"
                                             >
                                                 {{ $latestSubmission && $latestSubmission->status === 'draft' ? 'Làm tiếp' : 'Làm bài' }}
                                             </a>
                                         @endif
                                     @else
-                                        <span class="text-xs text-slate-400">Đã đóng</span>
+                                        <span class="text-xs font-semibold" style="color: oklch(46% 0.018 58);">Đã đóng</span>
                                     @endif
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="py-12 text-center text-slate-500 text-sm font-medium">
+                                <td colspan="7" class="py-12 text-center text-sm font-medium" style="color: oklch(46% 0.018 58);">
                                     Nhiệm vụ đọc hiểu này chưa có nhiệm vụ học tập nào.
                                 </td>
                             </tr>
@@ -282,10 +295,14 @@
                     tabs.forEach(t => {
                         if (t === tab) {
                             t.classList.remove('border-transparent', 'text-slate-400', 'hover:text-slate-600');
-                            t.classList.add('border-blue-600', 'text-blue-600');
+                            t.classList.add('text-blue-600');
+                            t.style.borderColor = 'oklch(44% 0.064 54)';
+                            t.style.color = 'oklch(44% 0.064 54)';
                         } else {
-                            t.classList.remove('border-blue-600', 'text-blue-600');
                             t.classList.add('border-transparent', 'text-slate-400', 'hover:text-slate-600');
+                            t.classList.remove('text-blue-600');
+                            t.style.borderColor = 'transparent';
+                            t.style.color = '';
                         }
                     });
 

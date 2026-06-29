@@ -181,8 +181,9 @@
                             <p class="mt-1 text-xs" style="color: oklch(58% 0.140 24);">{{ $message }}</p>
                         @enderror
                     </div>
-                    <button type="submit" class="inline-flex rounded-xl px-4 py-2.5 text-xs font-semibold text-white shadow transition hover:opacity-90"
-                            style="background: oklch(40% 0.068 54);">
+                    <button type="submit" class="btn btn-sm !h-10 min-h-10 rounded-xl border-0 px-5 text-white shadow-none transition"
+                            style="background: var(--g-primary);"
+                            onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
                         Gửi bình luận
                     </button>
                 </form>

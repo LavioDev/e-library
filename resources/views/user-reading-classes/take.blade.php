@@ -23,15 +23,15 @@
         @endphp
 
         {{-- Card Thông Tin Bài Tập --}}
-        <div class="rounded-sm border border-slate-200 bg-white p-5 shadow-[0_18px_44px_-36px_rgba(15,23,42,0.35)]">
+        <div class="rounded-2xl border p-5 shadow-sm" style="background: oklch(99.8% 0.003 75); border-color: oklch(89% 0.018 72);">
             <div class="flex flex-wrap items-center justify-between gap-4">
                 <div class="space-y-1">
-                    <h1 class="text-lg font-bold text-slate-900">{{ $assignment->title }}</h1>
-                    <p class="text-xs text-slate-500">
-                        Hạn nộp: <span class="font-medium text-slate-700">{{ $assignment->due_at?->format('H:i d/m/Y') ?? 'Không giới hạn' }}</span>
+                    <h1 class="text-lg font-bold" style="color: oklch(18% 0.020 58);">{{ $assignment->title }}</h1>
+                    <p class="text-xs" style="color: oklch(46% 0.018 58);">
+                        Hạn nộp: <span class="font-semibold text-slate-700">{{ $assignment->due_at?->format('H:i d/m/Y') ?? 'Không giới hạn' }}</span>
                         <span class="text-slate-300 mx-2">·</span>
                         Trạng thái bài làm: 
-                        <span class="font-semibold text-blue-600">
+                        <span class="font-bold" style="color: oklch(40% 0.068 54);">
                             @if ($submission->status === 'draft')
                                 Đang làm nháp
                             @elseif ($submission->status === 'submitted')
@@ -45,7 +45,9 @@
                 <div>
                     <a
                         href="{{ route('user.reading-classes.show', $class) }}"
-                        class="btn btn-ghost btn-sm !h-10 min-h-10 rounded-sm border border-slate-200 bg-white px-4 text-slate-700 shadow-none hover:bg-slate-50 text-sm"
+                        class="btn btn-ghost btn-sm !h-10 min-h-10 rounded-xl border px-4 shadow-none transition"
+                        style="border-color: oklch(86% 0.020 72); background: oklch(99.4% 0.005 78); color: oklch(34% 0.022 62);"
+                        onmouseover="this.style.background='oklch(95% 0.012 75)'" onmouseout="this.style.background=''"
                     >
                         Quay lại nhóm
                     </a>
@@ -67,13 +69,13 @@
                     @php
                         $answer = $submission->answers->firstWhere('question_id', $question->id);
                     @endphp
-                    <div class="rounded-sm border border-slate-200 bg-white p-5 shadow-[0_18px_44px_-36px_rgba(15,23,42,0.35)] space-y-4">
+                    <div class="rounded-2xl border p-5 shadow-sm space-y-4" style="background: oklch(99.8% 0.003 75); border-color: oklch(89% 0.018 72);">
                         <div class="flex items-start justify-between gap-4">
                             <div class="space-y-1">
-                                <h3 class="text-sm font-semibold text-slate-800">
-                                    Câu {{ $index + 1 }}: <span class="font-normal">{{ $question->prompt }}</span>
+                                <h3 class="text-sm font-bold" style="color: oklch(18% 0.020 58);">
+                                    Câu {{ $index + 1 }}: <span class="font-medium" style="color: oklch(20% 0.022 60);">{{ $question->prompt }}</span>
                                 </h3>
-                                <p class="text-xs text-slate-400">
+                                <p class="text-xs font-semibold" style="color: oklch(46% 0.018 58);">
                                     Điểm tối đa: {{ rtrim(rtrim((string) $question->max_score, '0'), '.') }} điểm
                                 </p>
                             </div>
@@ -84,7 +86,8 @@
                             @if ($question->type === 'multiple_choice')
                                 <div class="grid gap-2">
                                     @foreach ($question->options_json ?? [] as $optIndex => $option)
-                                        <label class="flex items-center gap-3 rounded-sm border border-slate-100 bg-slate-50/50 p-3 hover:bg-slate-50 transition-colors cursor-pointer text-sm">
+                                        <label class="flex items-center gap-3 rounded-xl border p-3 hover:bg-slate-50 transition-colors cursor-pointer text-sm"
+                                               style="border-color: oklch(90% 0.018 74); background: oklch(98% 0.005 76); color: oklch(20% 0.022 60);">
                                             <input
                                                 type="radio"
                                                 name="answers[{{ $question->id }}][selected_answer]"
@@ -93,7 +96,7 @@
                                                 @checked($answer?->selected_answer === $option)
                                                 @disabled($isReadOnly)
                                             />
-                                            <span class="text-slate-700">{{ $option }}</span>
+                                            <span class="font-medium">{{ $option }}</span>
                                         </label>
                                     @endforeach
                                 </div>
@@ -103,21 +106,23 @@
                                     name="answers[{{ $question->id }}][text_answer]"
                                     rows="4"
                                     placeholder="Nhập câu trả lời của bạn tại đây..."
-                                    class="textarea textarea-sm w-full rounded-sm border border-slate-200 bg-white text-sm text-slate-800 shadow-none focus:outline-none"
+                                    class="textarea textarea-sm w-full rounded-xl border text-sm shadow-none focus:outline-none"
+                                    style="border-color: oklch(86% 0.020 72); background: oklch(97% 0.010 76); color: oklch(20% 0.022 60);"
                                     @disabled($isReadOnly)
                                 >{{ $answer?->text_answer }}</textarea>
 
                             @elseif ($question->type === 'file_input')
                                 <div class="space-y-2">
                                     @if ($answer && $answer->files->isNotEmpty())
-                                        <div class="rounded-sm border border-slate-200 bg-slate-50 px-4 py-3 flex items-center justify-between text-xs">
-                                            <div class="flex items-center gap-2 text-slate-700 font-medium">
+                                        <div class="rounded-xl border px-4 py-3 flex items-center justify-between text-xs"
+                                             style="background: oklch(97% 0.010 76); border-color: oklch(90% 0.018 74); color: oklch(20% 0.022 60);">
+                                            <div class="flex items-center gap-2 font-medium">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                                 </svg>
                                                 <span>{{ $answer->files->first()->original_name }}</span>
                                             </div>
-                                            <span class="text-slate-400">({{ number_format($answer->files->first()->size / 1024, 1) }} KB)</span>
+                                            <span class="font-semibold" style="color: oklch(46% 0.018 58);">({{ number_format($answer->files->first()->size / 1024, 1) }} KB)</span>
                                         </div>
                                     @endif
 
@@ -125,9 +130,10 @@
                                         <input
                                             type="file"
                                             name="answers[{{ $question->id }}][file]"
-                                            class="file-input file-input-bordered file-input-sm w-full rounded-sm text-xs bg-white border-slate-200"
+                                            class="file-input file-input-bordered file-input-sm w-full rounded-xl text-xs bg-white"
+                                            style="border-color: oklch(86% 0.020 72);"
                                         />
-                                        <p class="text-[10px] text-slate-400">Định dạng chấp nhận: Tệp văn bản, hình ảnh hoặc PDF</p>
+                                        <p class="text-[10px] font-serif italic" style="color: oklch(46% 0.018 58);">💡 Định dạng chấp nhận: Tệp văn bản, hình ảnh hoặc PDF</p>
                                     @endif
                                 </div>
                             @endif
@@ -135,13 +141,14 @@
 
                         {{-- Hiển thị kết quả chấm điểm nếu đã chấm --}}
                         @if ($submission->status === 'graded' && $answer)
-                            <div class="mt-4 border-t border-slate-100 pt-3 flex flex-wrap justify-between items-center gap-2 text-xs">
-                                <span class="font-medium text-slate-700">
-                                    Điểm đạt được: <span class="font-bold text-blue-600">{{ rtrim(rtrim((string) $answer->score, '0'), '.') }}</span> / {{ rtrim(rtrim((string) $question->max_score, '0'), '.') }}
+                            <div class="mt-4 border-t pt-3 flex flex-wrap justify-between items-center gap-2 text-xs" style="border-color: oklch(90% 0.018 74);">
+                                <span class="font-bold" style="color: oklch(18% 0.020 58);">
+                                    Điểm đạt được: <span class="font-bold" style="color: oklch(40% 0.068 54);">{{ rtrim(rtrim((string) $answer->score, '0'), '.') }}</span> / {{ rtrim(rtrim((string) $question->max_score, '0'), '.') }}
                                 </span>
                                 @if ($answer->comment)
-                                    <div class="w-full bg-blue-50/50 border border-blue-100 rounded-sm p-2.5 text-blue-800 mt-2">
-                                        <span class="font-semibold block mb-0.5">Nhận xét của giáo viên:</span>
+                                    <div class="w-full rounded-xl border p-3 mt-2"
+                                         style="background: oklch(95% 0.020 240 / 0.5); border-color: oklch(62% 0.090 240 / 0.3); color: oklch(35% 0.080 240);">
+                                        <span class="font-bold block mb-0.5">Nhận xét của giáo viên:</span>
                                         {{ $answer->comment }}
                                     </div>
                                 @endif
@@ -158,49 +165,58 @@
                         type="submit"
                         name="action"
                         value="save"
-                        class="btn btn-ghost btn-sm !h-10 min-h-10 rounded-sm border border-slate-200 bg-white px-5 text-slate-700 shadow-none hover:bg-slate-50 text-sm"
+                        class="btn btn-ghost btn-sm !h-10 min-h-10 rounded-xl border px-5 shadow-none transition"
+                        style="border-color: oklch(86% 0.020 72); background: oklch(99.4% 0.005 78); color: oklch(34% 0.022 62);"
+                        onmouseover="this.style.background='oklch(95% 0.012 75)'" onmouseout="this.style.background=''"
                     >
                         Lưu nháp
                     </button>
                     <button
                         type="button"
                         id="submit-assignment-btn"
-                        class="btn btn-sm !h-10 min-h-10 rounded-sm border-0 bg-blue-600 px-6 text-white shadow-none hover:bg-blue-700 text-sm"
+                        class="btn btn-sm !h-10 min-h-10 rounded-xl border px-6 text-white shadow-none transition"
+                        style="border: 1px solid oklch(36% 0.056 50 / 0.35); background: var(--g-primary);"
+                        onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'"
                     >
                         Nộp bài
                     </button>
                 </div>
             @else
                 @if ($submission->status === 'graded' && $submission->overall_comment)
-                    <div class="rounded-sm border border-blue-200 bg-blue-50 p-5 space-y-2">
-                        <h4 class="text-sm font-semibold text-blue-900">Nhận xét tổng thể của giáo viên:</h4>
-                        <p class="text-xs text-blue-800 leading-relaxed">{{ $submission->overall_comment }}</p>
+                    <div class="rounded-xl border p-5 space-y-2"
+                         style="background: oklch(95% 0.020 240 / 0.5); border-color: oklch(62% 0.090 240 / 0.3); color: oklch(35% 0.080 240);">
+                        <h4 class="text-sm font-bold">Nhận xét tổng thể của giáo viên:</h4>
+                        <p class="text-xs leading-relaxed">{{ $submission->overall_comment }}</p>
                     </div>
                 @endif
             @endif
         </form>
 
-        {{-- Custom DaisyUI Modal for Submit Confirmation --}}
+        {{-- Custom Confirmation Modal --}}
         <dialog id="confirm-submit-modal" class="modal">
-            <div class="modal-box max-w-md rounded-sm bg-white p-0 shadow-2xl border border-slate-200">
-                <div class="border-b border-slate-200 px-5 py-4">
-                    <h3 class="text-lg font-semibold text-slate-900">Xác nhận nộp bài</h3>
+            <div class="modal-box max-w-md p-0 shadow-2xl border" style="background: oklch(99.4% 0.005 78); border-color: oklch(88% 0.020 72); border-radius: 16px;">
+                <div class="px-5 py-4 border-b" style="border-color: oklch(90% 0.018 74);">
+                    <h3 class="text-lg font-bold" style="color: oklch(18% 0.020 58);">Xác nhận nộp bài</h3>
                 </div>
-                <div class="px-5 py-5 text-sm text-slate-600 space-y-2">
+                <div class="px-5 py-5 text-sm space-y-2" style="color: oklch(34% 0.025 64);">
                     <p>Bạn có chắc chắn muốn nộp bộ câu hỏi này?</p>
-                    <p class="font-medium text-blue-600">Lưu ý: Sau khi nộp, bạn sẽ không thể chỉnh sửa câu trả lời của mình nữa.</p>
+                    <p class="font-bold" style="color: oklch(40% 0.068 54);">Lưu ý: Sau khi nộp, bạn sẽ không thể chỉnh sửa câu trả lời của mình nữa.</p>
                 </div>
-                <div class="modal-action mt-0 border-t border-slate-200 px-5 py-4">
+                <div class="modal-action mt-0 px-5 py-4 border-t" style="border-color: oklch(90% 0.018 74);">
                     <button
                         type="button"
-                        class="btn btn-ghost btn-sm !h-10 min-h-10 rounded-sm border border-slate-200 bg-white px-4 text-slate-700 shadow-none hover:bg-slate-50 text-sm"
+                        class="btn btn-ghost btn-sm !h-10 min-h-10 rounded-xl border px-4 shadow-none transition"
+                        style="border-color: oklch(86% 0.020 72); background: oklch(99.4% 0.005 78); color: oklch(34% 0.022 62);"
+                        onmouseover="this.style.background='oklch(95% 0.012 75)'" onmouseout="this.style.background=''"
                         id="confirm-submit-cancel"
                     >
                         Hủy
                     </button>
                     <button
                         type="button"
-                        class="btn btn-sm !h-10 min-h-10 rounded-sm border-0 bg-blue-600 px-4 text-white shadow-none hover:bg-blue-700 text-sm"
+                        class="btn btn-sm !h-10 min-h-10 rounded-xl border px-4 text-white shadow-none transition"
+                        style="border: 1px solid oklch(36% 0.056 50 / 0.35); background: var(--g-primary);"
+                        onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'"
                         id="confirm-submit-ok"
                     >
                         Nộp bài
