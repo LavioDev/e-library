@@ -50,8 +50,12 @@
                                 
                                 <div class="mt-2 flex justify-center">
                                     @if ($file->file_type === 'image')
+                                        @php
+                                            $isTeacher = auth()->check() && auth()->user()->role === 'teacher';
+                                        @endphp
                                         <div class="overflow-hidden rounded-xl border p-1" style="background: oklch(99.4% 0.005 78); border-color: oklch(89% 0.018 72);">
-                                            <img src="{{ route('texts.files.serve', ['text' => $text, 'filename' => basename($file->file_path)]) }}" alt="{{ $file->file_name }}" class="max-h-[400px] w-auto max-w-full object-contain rounded-lg" />
+                                            <img src="{{ route('texts.files.serve', ['text' => $text, 'filename' => basename($file->file_path)]) }}" alt="{{ $file->file_name }}" class="max-h-[400px] w-auto max-w-full object-contain rounded-lg"
+                                                 @if(!$isTeacher) onerror="this.closest('.rounded-xl.border').style.display='none';" @endif />
                                         </div>
                                     @elseif ($file->file_type === 'video')
                                         <div class="w-full overflow-hidden rounded-xl border bg-black" style="border-color: oklch(89% 0.018 72);">
@@ -129,7 +133,11 @@
                                             <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="https://drive.google.com/file/d/{{ $driveMatch[1] }}/preview" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                         </div>
                                     @else
-                                        <img src="https://drive.google.com/thumbnail?id={{ $driveMatch[1] }}&sz=w1600" alt="Google Drive Image" class="w-full h-auto rounded-2xl border shadow-sm" style="display: block; width: 100%; height: auto; border-color: oklch(89% 0.018 72);" />
+                                        @php
+                                            $isTeacher = auth()->check() && auth()->user()->role === 'teacher';
+                                        @endphp
+                                        <img src="https://drive.google.com/thumbnail?id={{ $driveMatch[1] }}&sz=w1600" alt="Google Drive Image" class="w-full h-auto rounded-2xl border shadow-sm" style="display: block; width: 100%; height: auto; border-color: oklch(89% 0.018 72);"
+                                             @if(!$isTeacher) onerror="this.closest('.media-container').style.display='none';" @endif />
                                     @endif
                                     @auth
                                         @if (auth()->user()->role === 'teacher')
