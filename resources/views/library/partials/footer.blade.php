@@ -62,6 +62,36 @@
             <p class="lib-footer-copy">
                 © {{ date('Y') }} E-Library — Hệ thống thư viện điện tử mở.
             </p>
+            <p class="lib-footer-credit">
+                Được thiết kế bởi
+                <button type="button" id="laviodev-btn" class="laviodev-link" onclick="document.getElementById('laviodev-modal').classList.add('is-open')" aria-haspopup="dialog">
+                    LavioDev
+                </button>
+            </p>
+        </div>
+
+        {{-- LavioDev Modal --}}
+        <div id="laviodev-modal" class="laviodev-modal" role="dialog" aria-modal="true" aria-labelledby="laviodev-modal-title" onclick="if(event.target===this)this.classList.remove('is-open')">
+            <div class="laviodev-modal-card">
+                <button class="laviodev-modal-close" onclick="document.getElementById('laviodev-modal').classList.remove('is-open')" aria-label="Đóng">&times;</button>
+                <h3 id="laviodev-modal-title" class="laviodev-modal-name">LavioDev</h3>
+                <p class="laviodev-modal-role">Nhà phát triển &amp; Thiết kế hệ thống</p>
+                <div class="laviodev-modal-divider"></div>
+                <ul class="laviodev-modal-contacts">
+                    <li>
+                        <span class="laviodev-contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        </span>
+                        <a href="mailto:khanhnd05@gmail.com" class="laviodev-contact-link">khanhnd05@gmail.com</a>
+                    </li>
+                    <li>
+                        <span class="laviodev-contact-icon laviodev-fb-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </span>
+                        <a href="https://www.facebook.com/nguyen.khanh.201930" target="_blank" rel="noopener noreferrer" class="laviodev-contact-link">facebook.com/nguyen.khanh.201930</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </footer>
@@ -178,7 +208,7 @@
 .lib-footer-bottom {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.5rem;
     padding-top: 2rem;
     align-items: center;
 }
@@ -187,6 +217,7 @@
     .lib-footer-bottom {
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
         gap: 2rem;
     }
 }
@@ -202,6 +233,144 @@
         text-align: left;
     }
 }
+
+.lib-footer-credit {
+    font-size: 0.76rem;
+    color: oklch(58% 0.012 64);
+    text-align: center;
+    white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+    .lib-footer-credit {
+        text-align: right;
+        margin-left: auto;
+    }
+}
+
+/* LavioDev underline button */
+.laviodev-link {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
+    color: oklch(40% 0.068 54);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.18s ease, opacity 0.18s ease;
+}
+.laviodev-link:hover {
+    color: oklch(28% 0.065 54);
+    opacity: 0.85;
+}
+
+/* LavioDev Modal overlay */
+.laviodev-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+    animation: lavioFadeIn 0.2s ease;
+}
+.laviodev-modal.is-open {
+    display: flex;
+}
+@keyframes lavioFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Modal card */
+.laviodev-modal-card {
+    position: relative;
+    background: #fff;
+    border-radius: 1.25rem;
+    padding: 2.5rem 2rem 2rem;
+    max-width: 22rem;
+    width: 90%;
+    box-shadow: 0 24px 60px -8px rgba(0,0,0,0.22), 0 4px 16px -4px rgba(0,0,0,0.12);
+    animation: lavioSlideUp 0.25s cubic-bezier(.22,.68,0,1.2);
+    text-align: center;
+}
+@keyframes lavioSlideUp {
+    from { transform: translateY(24px); opacity: 0; }
+    to   { transform: translateY(0);   opacity: 1; }
+}
+
+/* Close button */
+.laviodev-modal-close {
+    position: absolute;
+    top: 0.85rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    color: oklch(58% 0.012 64);
+    transition: color 0.15s;
+}
+.laviodev-modal-close:hover { color: oklch(25% 0.022 56); }
+
+.laviodev-modal-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: oklch(22% 0.022 56);
+    margin: 0 0 0.25rem;
+}
+.laviodev-modal-role {
+    font-size: 0.78rem;
+    color: oklch(52% 0.018 62);
+    margin: 0;
+}
+.laviodev-modal-divider {
+    height: 1px;
+    background: oklch(92% 0.010 72);
+    margin: 1.25rem 0;
+}
+
+/* Contact list */
+.laviodev-modal-contacts {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    text-align: left;
+}
+.laviodev-modal-contacts li {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+.laviodev-contact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    background: oklch(97% 0.006 72);
+    color: oklch(42% 0.068 54);
+    flex-shrink: 0;
+}
+.laviodev-contact-icon svg { width: 1rem; height: 1rem; }
+.laviodev-fb-icon { color: #1877f2; background: #e7f0fd; }
+.laviodev-contact-link {
+    font-size: 0.80rem;
+    color: oklch(35% 0.040 56);
+    text-decoration: none;
+    word-break: break-all;
+    transition: color 0.15s;
+}
+.laviodev-contact-link:hover { color: oklch(42% 0.068 54); text-decoration: underline; }
 
 .lib-footer-bottom-links {
     display: flex;

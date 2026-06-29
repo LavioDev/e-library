@@ -357,7 +357,7 @@
 /* Card title */
 .lib-card-title {
     font-family: var(--font-serif);
-    font-size: 0.975rem;
+    font-size: 1.5rem;
     font-weight: 600;
     line-height: 1.45;
     color: var(--tx-title);
