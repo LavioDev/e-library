@@ -556,15 +556,13 @@
 
             {{-- Main heading --}}
             <h1 class="lib-hero-title serif">
-                Bộ sưu tập văn bản <span class="highlight">chọn lọc</span>
-                <br>
-                dành cho học tập &amp; giảng dạy
+                Khám phá kho văn bản văn học phong phú: thơ, truyện ngắn, kí, kịch
             </h1>
 
             {{-- Sub-description --}}
             <p class="lib-hero-sub">
-                Khám phá kho văn học phong phú — thơ, văn xuôi, truyện ngắn, kịch và
-                nhiều thể loại khác nữa.
+                Thư viện Văn học là không gian học tập số hỗ trợ dạy học đọc hiểu theo định hướng phân hóa, cung cấp hệ thống văn bản thơ, truyện thơ, truyện ngắn, kí, tản văn, truyện kí và kịch. Văn bản được tổ chức theo chủ đề, mức độ khó – dễ và nhóm đối tượng học sinh, kết hợp đa dạng hình thức tiếp nhận qua kênh chữ, kênh hình và kênh tiếng, cùng hệ thống nhiệm vụ đọc hiểu tự chọn phù hợp với năng lực, hứng thú và phong cách học tập của người học.
+
             </p>
 
             {{-- CTA row --}}
