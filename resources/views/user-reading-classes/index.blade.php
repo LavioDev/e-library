@@ -115,7 +115,7 @@
 
 .lib-card-title {
     font-family: var(--font-serif);
-    font-size: 1.05rem;
+    font-size: 1.25rem;
     font-weight: 600;
     line-height: 1.4;
     color: var(--tx-title);
