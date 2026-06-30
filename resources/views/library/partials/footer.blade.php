@@ -37,10 +37,10 @@
             <div class="lib-footer-col">
                 <h4 class="lib-footer-title">Thể loại chính</h4>
                 <ul class="lib-footer-links">
-                    <li><a href="#">Thơ ca Việt Nam</a></li>
-                    <li><a href="#">Văn xuôi & Tiểu thuyết</a></li>
-                    <li><a href="#">Truyện ngắn chọn lọc</a></li>
-                    <li><a href="#">Kịch bản & Nghị luận</a></li>
+                    <li><a href="#">Thơ trữ tình</a></li>
+                    <li><a href="#">Truyện ngắn</a></li>
+                    <li><a href="#">Kịch</a></li>
+                    <li><a href="#">Kí</a></li>
                 </ul>
             </div>
 
